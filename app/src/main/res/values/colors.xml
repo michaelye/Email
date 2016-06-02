@@ -8,4 +8,10 @@
     <color name="menuColorGreen">#00954e</color>
     <color name="menuColorRed">#ff4521</color>
     <color name="menuColorORange">#F56D23</color>
+
+    <color name="newL_text_color">#555555</color>
+    <color name="newS_text_color">#c8c8c8</color>
+
+    <color name="list_view_divider_color">#DDDDDD</color>
+
 </resources>

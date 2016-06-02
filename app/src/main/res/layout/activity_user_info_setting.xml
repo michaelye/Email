@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center_horizontal"
+              android:layout_marginLeft="28dip"
+              android:layout_marginRight="28dip"
+              android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvLoginHeaderTips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/activity_user_info_setting_tip"
+        android:textColor="@color/newL_text_color"
+        android:textSize="18sp"
+        android:visibility="invisible"/>
+
+    <RelativeLayout
+        android:id="@+id/rlUserName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dip"
+        android:layout_marginRight="12dip"
+        android:background="@null">
+
+        <ImageView
+            android:id="@+id/ivClearName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="4dp"
+            android:src="@drawable/ic_action_clear"
+            android:visibility="invisible"/>
+
+        <EditText
+            android:id="@+id/etUserName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/ivClearName"
+            android:background="@null"
+            android:imeOptions="actionDone"
+            android:inputType="textEmailAddress"
+            android:paddingBottom="12dip"
+            android:paddingTop="12dip"
+            android:textCursorDrawable="@null"
+            android:hint="@string/user_name_hint"
+            android:textColorHint="@color/newS_text_color"
+            android:textSize="13sp"/>
+    </RelativeLayout>
+
+    <View
+        style="@style/list_view_line"
+        android:layout_height="1dip"
+        android:layout_marginLeft="12dip"
+        android:layout_marginRight="12dip"
+        />
+
+    <Button
+        android:id="@+id/btnOk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginLeft="12dip"
+        android:layout_marginRight="12dip"
+        android:text="@string/ok"
+        android:textColor="@android:color/white"
+        android:background="@color/colorAccent"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:textSize="16sp"/>
+
+</LinearLayout>

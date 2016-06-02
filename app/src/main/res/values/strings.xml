@@ -8,4 +8,10 @@
     <string name="menu_other">其它</string>
     <string name="menu_setting">设置</string>
     <string name="menu_about">关于</string>
+
+    <string name="ok">确认</string>
+
+    <string name="activity_user_info_setting_tip">输入您的邮箱地址</string>
+    <string name="user_name_hint">您的邮箱地址</string>
+
 </resources>

@@ -3,4 +3,5 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="tool_bar_height">80dp</dimen>
+    <dimen name="list_view_divider_height_new">1px</dimen>
 </resources>

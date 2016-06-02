@@ -9,4 +9,18 @@
         <item name="android:windowBackground">@android:color/white</item><!-- 启动加载默认的颜色 -->
     </style>
 
+    <style name="list_view_line" parent="Widget.AppCompat.ActionBar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/list_view_divider_height_new</item>
+        <item name="android:background">@color/list_view_divider_color</item>
+    </style>
+
+    <style name="AppThemeWithActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@android:color/white</item><!-- 启动加载默认的颜色 -->
+    </style>
+
 </resources>
