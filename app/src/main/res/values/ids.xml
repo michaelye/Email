@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="dialog_choose_avatar_from_gallery" type="id"/>
+    <item name="dialog_choose_avatar_from_camera" type="id"/>
+
+</resources>

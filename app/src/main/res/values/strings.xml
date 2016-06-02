@@ -10,8 +10,18 @@
     <string name="menu_about">关于</string>
 
     <string name="ok">确认</string>
+    <string name="cancel">取消</string>
+    <string name="dialog_choose_avatar">选择头像</string>
+    <string name="dialog_choose_avatar_gallery">图库</string>
+    <string name="dialog_choose_avatar_camera">拍照</string>
+    <string name="dialog_choose_avatar_camera_refuse">你拒绝了打开相机的权限，请到设置中修改</string>
+    <string name="dialog_choose_avatar_save_avatar_fail">对不起，图片保存失败</string>
+    <string name="dialog_choose_avatar_sdcard_not_found">SD卡不存在</string>
 
     <string name="activity_user_info_setting_tip">输入您的邮箱地址</string>
     <string name="user_name_hint">您的邮箱地址</string>
+
+    <string name="toast_email_empty">邮箱不能为空</string>
+    <string name="toast_email_format_invalid">邮箱不符合规范</string>
 
 </resources>

@@ -2,9 +2,12 @@ package com.michael.email.ui.activity;
 
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -20,29 +23,35 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.michael.email.R;
 import com.michael.email.ui.fragment.FlagFragment;
 import com.michael.email.ui.fragment.PendingFragment;
 import com.michael.email.ui.fragment.SendFragment;
+import com.michael.email.util.Consts;
+import com.michael.email.util.EmailBus;
+import com.michael.email.util.ImageUtils;
+import com.michael.email.util.SharedPreferenceUtils;
+import com.michael.email.util.UIUtil;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
+
+import java.io.File;
 
 /**
  * 程序的主界面
  *
  * @author michael
  */
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends AppCompatActivity implements View.OnClickListener
 {
     private String TAG = this.getClass().getName();
     private Toolbar toolBar;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     private SystemBarTintManager tintManager;
-    /**存放Fragment*/
-    private FrameLayout flContainer;
     /**发送过的邮件*/
     private SendFragment sendFragment;
     /**加星星的邮件*/
@@ -55,7 +64,23 @@ public class MainActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        EmailBus.getInstance().register(this);
         iniComponent();
+    }
+
+    public void onEventMainThread(EmailBus.BusEvent busEvent)
+    {
+        if (busEvent.eventId == EmailBus.BUS_ID_REFRESH_USER_INFO)
+        {
+            iniNavigationViewHeader();//刷新一下
+        }
+    }
+
+    @Override
+    public void onDestroy()
+    {
+        super.onDestroy();
+        EmailBus.getInstance().unregister(this);
     }
 
     private void iniComponent()
@@ -67,8 +92,6 @@ public class MainActivity extends AppCompatActivity
         toolBar = (Toolbar) findViewById(R.id.toolBar);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         navigationView = (NavigationView) findViewById(R.id.navigationView);
-        flContainer = (FrameLayout) findViewById(R.id.flContainer);
-
         navigationView.setItemIconTintList(null);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener()
         {
@@ -85,6 +108,7 @@ public class MainActivity extends AppCompatActivity
                 {
                     case R.id.menuSend:
                         navigationView.setCheckedItem(R.id.menuSend);
+                        tvTitle.setText(getResources().getString(R.string.menu_send));
                         resetMenuTextColor();
                         changeMenuItemTextColor(menuItem, R.color.menuColorGreen);
                         changeToolbarColor(R.color.menuColorGreen);
@@ -96,6 +120,7 @@ public class MainActivity extends AppCompatActivity
                         break;
                     case R.id.menuFlag:
                         navigationView.setCheckedItem(R.id.menuFlag);
+                        tvTitle.setText(getResources().getString(R.string.menu_flag));
                         resetMenuTextColor();
                         changeMenuItemTextColor(menuItem, R.color.menuColorRed);
                         changeToolbarColor(R.color.menuColorRed);
@@ -107,6 +132,7 @@ public class MainActivity extends AppCompatActivity
                         break;
                     case R.id.menuPending:
                         navigationView.setCheckedItem(R.id.menuPending);
+                        tvTitle.setText(getResources().getString(R.string.menu_pending));
                         resetMenuTextColor();
                         changeMenuItemTextColor(menuItem, R.color.menuColorORange);
                         changeToolbarColor(R.color.menuColorORange);
@@ -125,6 +151,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
         iniToolBar();
+        iniNavigationViewHeader();
         setDefaultCheckedMenu();
     }
 
@@ -138,6 +165,8 @@ public class MainActivity extends AppCompatActivity
         transaction.replace(R.id.flContainer, fragment);
         transaction.commit();
     }
+
+    private TextView tvTitle;
 
     /**
      * Toolbar里面的内容是自己定制的
@@ -156,6 +185,48 @@ public class MainActivity extends AppCompatActivity
                 drawerLayout.openDrawer(GravityCompat.START);
             }
         });
+        tvTitle = (TextView)viewToolBar.findViewById(R.id.tvTitle);
+    }
+
+    private ImageView ivAvatar;
+    /**
+     * 头像和Email所在的Header
+     * */
+    private void iniNavigationViewHeader()
+    {
+        View headerLayout = navigationView.getHeaderView(0);
+        ivAvatar = (ImageView)headerLayout.findViewById(R.id.ivAvatar);
+        displayAvatar();
+        TextView tvEmail = (TextView)headerLayout.findViewById(R.id.tvEmail);
+        tvEmail.setText(SharedPreferenceUtils.getString(this, Consts.USER_EMAIL, ""));
+        tvEmail.setOnClickListener(this);
+        ivAvatar.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view)
+    {
+        switch (view.getId())
+        {
+            case R.id.tvEmail:
+            case R.id.ivAvatar:
+                UIUtil.startUserInfoSettingActivity(MainActivity.this, true);
+                break;
+        }
+    }
+
+    /**
+     * 如果有头像，就显示头像
+     */
+    private void displayAvatar()
+    {
+        String AVATAR_PATH = Environment.getExternalStorageDirectory() + File.separator + getResources().getString(R.string.app_name) + File.separator;
+        File imageFile = new File(AVATAR_PATH + Consts.AVATAR_NAME);
+        if (imageFile.exists())
+        {
+            Bitmap bitmap = ImageUtils.getCroppedBitmap(BitmapFactory.decodeFile(imageFile.getAbsolutePath()));
+            ivAvatar.setImageBitmap(bitmap);
+        }
     }
 
     /**

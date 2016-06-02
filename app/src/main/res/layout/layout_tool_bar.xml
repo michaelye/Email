@@ -1,28 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
     >
 
-    <RelativeLayout
-        android:id="@+id/rlMenu"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="12dip"
-        android:background="?android:attr/selectableItemBackground"
-        android:clickable="true">
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
-        <ImageView
+        <RelativeLayout
+            android:id="@+id/rlMenu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="12dip"
-            android:src="@drawable/ic_menu"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true">
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dip"
+                android:src="@drawable/ic_menu"
+                />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/rlMenu"
+            android:text="已发送"
+            android:layout_marginLeft="20dip"
+            android:textColor="@android:color/white"
+            android:textSize="19sp"
             />
-    </RelativeLayout>
-
-
+    </LinearLayout>
 
 </RelativeLayout>

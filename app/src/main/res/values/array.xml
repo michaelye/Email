@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="choose_avatar_id">
+        <item>@id/dialog_choose_avatar_from_gallery</item>
+        <item>@id/dialog_choose_avatar_from_camera</item>
+    </integer-array>
+    <string-array name="choose_avatar">
+        <item>@string/dialog_choose_avatar_gallery</item>
+        <item>@string/dialog_choose_avatar_camera</item>
+    </string-array>
+</resources>

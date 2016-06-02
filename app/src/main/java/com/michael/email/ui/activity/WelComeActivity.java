@@ -1,6 +1,5 @@
 package com.michael.email.ui.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.animation.Animation;
@@ -8,6 +7,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.michael.email.R;
+import com.michael.email.util.Consts;
+import com.michael.email.util.SharedPreferenceUtils;
+import com.michael.email.util.UIUtil;
 
 /**
  * 欢迎界面
@@ -47,8 +49,15 @@ public class WelComeActivity extends AppCompatActivity
             @Override
             public void onAnimationEnd(Animation animation)
             {
-                Intent mainIntent = new Intent(WelComeActivity.this, MainActivity.class);
-                WelComeActivity.this.startActivity(mainIntent);
+                String userEmail = SharedPreferenceUtils.getString(WelComeActivity.this, Consts.USER_EMAIL, "");
+                if(userEmail == null || userEmail.isEmpty())
+                {
+                    UIUtil.startUserInfoSettingActivity(WelComeActivity.this, true);
+                }
+                else
+                {
+                    UIUtil.startMainActivity(WelComeActivity.this);
+                }
                 overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out);
                 WelComeActivity.this.finish();
             }

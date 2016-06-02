@@ -41,5 +41,6 @@
         android:layout_gravity="start"
         app:itemTextColor="@color/menuColorBlack"
         app:headerLayout="@layout/layout_menu_header"
+        android:layout_marginLeft="60dp"
         app:menu="@menu/menu"/> <!-- The items to display -->
 </android.support.v4.widget.DrawerLayout>

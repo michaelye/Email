@@ -1,8 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-    android:background="@drawable/bg_menu_header_512">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_menu_header_512"
+    >
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:paddingBottom="12dip"
+        android:paddingLeft="12dip"
+        android:paddingTop="12dip">
+
+        <ImageView
+            android:id="@+id/ivAvatar"
+            android:layout_width="62dip"
+            android:layout_height="62dip"
+            android:src="@drawable/ic_avatar"/>
+
+        <TextView
+            android:id="@+id/tvEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dip"
+            android:drawablePadding="24dip"
+            android:drawableRight="@drawable/ic_triangle_setting"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>

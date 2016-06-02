@@ -8,9 +8,12 @@ import android.app.Application;
 public class EmailApp extends Application
 {
 
+    public static EmailApp applicationContext;
+
     @Override
     public void onCreate()
     {
         super.onCreate();
+        applicationContext = this;
     }
 }
