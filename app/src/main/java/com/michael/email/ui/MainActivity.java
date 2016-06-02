@@ -81,10 +81,10 @@ public class MainActivity extends AppCompatActivity
                     return false;
                 }
                 resetMenuTextColor();
-                navigationView.setCheckedItem(R.id.menuSend);
                 switch (menuItem.getItemId())
                 {
                     case R.id.menuSend:
+                        navigationView.setCheckedItem(R.id.menuSend);
                         resetMenuTextColor();
                         changeMenuItemTextColor(menuItem, R.color.menuColorGreen);
                         changeToolbarColor(R.color.menuColorGreen);
@@ -95,6 +95,7 @@ public class MainActivity extends AppCompatActivity
                         changeFragment(sendFragment);
                         break;
                     case R.id.menuFlag:
+                        navigationView.setCheckedItem(R.id.menuFlag);
                         resetMenuTextColor();
                         changeMenuItemTextColor(menuItem, R.color.menuColorRed);
                         changeToolbarColor(R.color.menuColorRed);
@@ -105,6 +106,7 @@ public class MainActivity extends AppCompatActivity
                         changeFragment(flagFragment);
                         break;
                     case R.id.menuPending:
+                        navigationView.setCheckedItem(R.id.menuPending);
                         resetMenuTextColor();
                         changeMenuItemTextColor(menuItem, R.color.menuColorORange);
                         changeToolbarColor(R.color.menuColorORange);
