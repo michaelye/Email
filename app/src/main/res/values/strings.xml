@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">番茄邮件</string>
+
+    <string name="menu_send">已发送</string>
+    <string name="menu_flag">加星</string>
+    <string name="menu_pending">定时发送</string>
+    <string name="menu_other">其它</string>
+    <string name="menu_setting">设置</string>
+    <string name="menu_about">关于</string>
 </resources>

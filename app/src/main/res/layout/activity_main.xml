@@ -1,17 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.v4.widget.DrawerLayout
+    android:id="@+id/drawerLayout"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".ui.MainActivity">
+    android:fitsSystemWindows="false"> <!-- this is important -->
 
-    <TextView
+    <!-- Your contents -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- We use a Toolbar so that our drawer can be displayed
+             in front of the action bar -->
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolBar"
+            android:layout_height="@dimen/tool_bar_height"
+            android:gravity="bottom"
+            android:layout_width="match_parent"
+            android:contentInsetStart="0dp"
+            android:contentInsetLeft="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            android:background="?attr/colorPrimary" />
+
+        <!-- The rest of your content view -->
+
+    </LinearLayout>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigationView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"/>
-</RelativeLayout>
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:itemTextColor="@color/menuColorBlack"
+        app:headerLayout="@layout/layout_menu_header"
+        app:menu="@menu/menu"/> <!-- The items to display -->
+</android.support.v4.widget.DrawerLayout>
