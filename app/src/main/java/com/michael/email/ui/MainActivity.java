@@ -6,6 +6,9 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -17,9 +20,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 import com.michael.email.R;
+import com.michael.email.ui.fragment.FlagFragment;
+import com.michael.email.ui.fragment.PendingFragment;
+import com.michael.email.ui.fragment.SendFragment;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 /**
@@ -34,6 +41,14 @@ public class MainActivity extends AppCompatActivity
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     private SystemBarTintManager tintManager;
+    /**存放Fragment*/
+    private FrameLayout flContainer;
+    /**发送过的邮件*/
+    private SendFragment sendFragment;
+    /**加星星的邮件*/
+    private FlagFragment flagFragment;
+    /**准备发送中的邮件*/
+    private PendingFragment pendingFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -52,6 +67,7 @@ public class MainActivity extends AppCompatActivity
         toolBar = (Toolbar) findViewById(R.id.toolBar);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         navigationView = (NavigationView) findViewById(R.id.navigationView);
+        flContainer = (FrameLayout) findViewById(R.id.flContainer);
 
         navigationView.setItemIconTintList(null);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener()
@@ -60,23 +76,43 @@ public class MainActivity extends AppCompatActivity
             public boolean onNavigationItemSelected(MenuItem menuItem)
             {
                 drawerLayout.closeDrawers();
+                if (menuItem.isChecked())
+                {
+                    return false;
+                }
                 resetMenuTextColor();
+                navigationView.setCheckedItem(R.id.menuSend);
                 switch (menuItem.getItemId())
                 {
                     case R.id.menuSend:
                         resetMenuTextColor();
                         changeMenuItemTextColor(menuItem, R.color.menuColorGreen);
                         changeToolbarColor(R.color.menuColorGreen);
+                        if(sendFragment == null)
+                        {
+                            sendFragment = new SendFragment();
+                        }
+                        changeFragment(sendFragment);
                         break;
                     case R.id.menuFlag:
                         resetMenuTextColor();
                         changeMenuItemTextColor(menuItem, R.color.menuColorRed);
                         changeToolbarColor(R.color.menuColorRed);
+                        if(flagFragment == null)
+                        {
+                            flagFragment = new FlagFragment();
+                        }
+                        changeFragment(flagFragment);
                         break;
                     case R.id.menuPending:
                         resetMenuTextColor();
                         changeMenuItemTextColor(menuItem, R.color.menuColorORange);
                         changeToolbarColor(R.color.menuColorORange);
+                        if(pendingFragment == null)
+                        {
+                            pendingFragment = new PendingFragment();
+                        }
+                        changeFragment(pendingFragment);
                         break;
                     case R.id.menuSetting:
                         break;
@@ -88,6 +124,17 @@ public class MainActivity extends AppCompatActivity
         });
         iniToolBar();
         setDefaultCheckedMenu();
+    }
+
+    /**
+     * Fragment之间的切换
+     * */
+    private void changeFragment(Fragment fragment)
+    {
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        transaction.replace(R.id.flContainer, fragment);
+        transaction.commit();
     }
 
     /**
@@ -114,7 +161,6 @@ public class MainActivity extends AppCompatActivity
      */
     private void setDefaultCheckedMenu()
     {
-        navigationView.setCheckedItem(R.id.menuSend);
         navigationView.getMenu().performIdentifierAction(R.id.menuSend, 0);
     }
 
