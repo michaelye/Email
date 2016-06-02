@@ -1,4 +1,4 @@
-package com.michael.email.ui;
+package com.michael.email.ui.activity;
 
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;

@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">番茄邮件</string>
+    <string name="author">纯情小腊鸭出品</string>
 
     <string name="menu_send">已发送</string>
     <string name="menu_flag">加星</string>
