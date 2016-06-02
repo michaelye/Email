@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menuSend"
+            android:icon="@drawable/ic_menu_done"
+            android:title="@string/menu_send"/>
+        <item
+            android:id="@+id/menuFlag"
+            android:icon="@drawable/ic_menu_flag"
+            android:title="@string/menu_flag"
+            />
+
+        <item
+            android:id="@+id/menuPending"
+            android:icon="@drawable/ic_menu_pending"
+            android:title="@string/menu_pending"/>
+    </group>
+
+    <item android:title="@string/menu_other">
+        <menu>
+            <item
+                android:id="@+id/menuSetting"
+                android:icon="@drawable/ic_menu_setting"
+                android:title="@string/menu_setting"/>
+            <item
+                android:id="@+id/menuAbout"
+                android:icon="@drawable/ic_menu_about"
+                android:title="@string/menu_about"/>
+        </menu>
+    </item>
+
+</menu>
