@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.michael.email.ui.activity.MainActivity;
+import com.michael.email.ui.activity.NewLetterActivity;
 import com.michael.email.ui.activity.UserInfoSettingActivity;
 
 /**
@@ -11,6 +12,9 @@ import com.michael.email.ui.activity.UserInfoSettingActivity;
  */
 public class UIUtil
 {
+    /**
+     * 程序主界面
+     * */
     public static void startMainActivity(Context context)
     {
         Intent intent = new Intent(context, MainActivity.class);
@@ -25,6 +29,15 @@ public class UIUtil
     {
         Intent intent = new Intent(context, UserInfoSettingActivity.class);
         intent.putExtra("isModify", isModify);
+        context.startActivity(intent);
+    }
+
+    /**
+     * 新邮件
+     * */
+    public static void startNewLetterActivity(Context context)
+    {
+        Intent intent = new Intent(context, NewLetterActivity.class);
         context.startActivity(intent);
     }
 }

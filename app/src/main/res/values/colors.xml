@@ -11,6 +11,7 @@
     <color name="menuColorBlue">#0E82FF</color>
 
     <color name="newL_text_color">#555555</color>
+    <color name="newM_text_color">#b4b4b4</color>
     <color name="newS_text_color">#c8c8c8</color>
 
     <color name="list_view_divider_color">#DDDDDD</color>

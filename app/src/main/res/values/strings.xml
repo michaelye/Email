@@ -9,6 +9,8 @@
     <string name="menu_other">其它</string>
     <string name="menu_setting">设置</string>
     <string name="menu_about">关于</string>
+    <string name="menu_attach_tip">添加附件</string>
+    <string name="menu_send_tip">发送</string>
 
     <string name="ok">确认</string>
     <string name="cancel">取消</string>
@@ -21,6 +23,10 @@
 
     <string name="activity_user_info_setting_tip">输入您的邮箱地址</string>
     <string name="user_name_hint">您的邮箱地址</string>
+
+    <string name="new_letter_activity_hint_email_to">收件人</string>
+    <string name="new_letter_activity_hint_subject">主题</string>
+    <string name="new_letter_activity_hint_say_something">说点什么</string>
 
     <string name="toast_email_empty">邮箱不能为空</string>
     <string name="toast_email_format_invalid">邮箱不符合规范</string>

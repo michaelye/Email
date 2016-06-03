@@ -16,21 +16,40 @@
              in front of the action bar -->
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolBar"
-            android:layout_height="@dimen/tool_bar_height"
-            android:gravity="bottom"
             android:layout_width="match_parent"
-            android:contentInsetStart="0dp"
+            android:layout_height="@dimen/tool_bar_height"
+            android:background="?attr/colorPrimary"
             android:contentInsetLeft="0dp"
+            android:contentInsetStart="0dp"
+            android:gravity="bottom"
             app:contentInsetLeft="0dp"
-            app:contentInsetStart="0dp"
-            android:background="?attr/colorPrimary" />
+            app:contentInsetStart="0dp"/>
 
         <!-- The rest of your content view -->
 
-        <FrameLayout
-            android:id="@+id/flContainer"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:id="@+id/flContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:id="@+id/ivNewLetter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/btn_pen_selector"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="16dip"
+                android:layout_marginBottom="16dip"
+                android:clickable="true"
+                />
+
+        </RelativeLayout>
+
 
     </LinearLayout>
 
@@ -39,8 +58,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:itemTextColor="@color/menuColorBlack"
-        app:headerLayout="@layout/layout_menu_header"
         android:layout_marginLeft="60dp"
+        app:headerLayout="@layout/layout_menu_header"
+        app:itemTextColor="@color/menuColorBlack"
         app:menu="@menu/menu"/> <!-- The items to display -->
 </android.support.v4.widget.DrawerLayout>

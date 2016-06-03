@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Toolbar toolBar;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
+    private ImageView ivNewLetter;
     private SystemBarTintManager tintManager;
     /**发送过的邮件*/
     private SendFragment sendFragment;
@@ -91,8 +92,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tintManager = new SystemBarTintManager(this);
         tintManager.setStatusBarTintEnabled(true);
         tintManager.setNavigationBarTintEnabled(true);
-
         toolBar = (Toolbar) findViewById(R.id.toolBar);
+        ivNewLetter = (ImageView) findViewById(R.id.ivNewLetter);
+        ivNewLetter.setOnClickListener(this);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         navigationView = (NavigationView) findViewById(R.id.navigationView);
         navigationView.setItemIconTintList(null);
@@ -226,6 +228,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.tvEmail:
             case R.id.ivAvatar:
                 UIUtil.startUserInfoSettingActivity(MainActivity.this, true);
+                break;
+            case R.id.ivNewLetter:
+                UIUtil.startNewLetterActivity(MainActivity.this);
                 break;
         }
     }
