@@ -275,6 +275,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         {
             changeMenuItemTextColor(menu.findItem(R.id.menuPending), R.color.menuColorBlack);
         }
+        if (menu.findItem(R.id.menuContacts).isChecked())
+        {
+            changeMenuItemTextColor(menu.findItem(R.id.menuContacts), R.color.menuColorBlack);
+        }
     }
 
     /**
