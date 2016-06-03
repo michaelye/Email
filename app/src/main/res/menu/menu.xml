@@ -16,6 +16,11 @@
             android:id="@+id/menuPending"
             android:icon="@drawable/ic_menu_pending"
             android:title="@string/menu_pending"/>
+
+        <item
+            android:id="@+id/menuContacts"
+            android:icon="@drawable/ic_menu_contacts"
+            android:title="@string/menu_contacts"/>
     </group>
 
     <item android:title="@string/menu_other">

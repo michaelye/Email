@@ -28,6 +28,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.michael.email.R;
+import com.michael.email.ui.fragment.ContactsFragment;
 import com.michael.email.ui.fragment.FlagFragment;
 import com.michael.email.ui.fragment.PendingFragment;
 import com.michael.email.ui.fragment.SendFragment;
@@ -58,6 +59,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FlagFragment flagFragment;
     /**准备发送中的邮件*/
     private PendingFragment pendingFragment;
+    /**联系人*/
+    private ContactsFragment contactsFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -134,13 +137,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         navigationView.setCheckedItem(R.id.menuPending);
                         tvTitle.setText(getResources().getString(R.string.menu_pending));
                         resetMenuTextColor();
-                        changeMenuItemTextColor(menuItem, R.color.menuColorORange);
-                        changeToolbarColor(R.color.menuColorORange);
+                        changeMenuItemTextColor(menuItem, R.color.menuColorOrange);
+                        changeToolbarColor(R.color.menuColorOrange);
                         if(pendingFragment == null)
                         {
                             pendingFragment = new PendingFragment();
                         }
                         changeFragment(pendingFragment);
+                        break;
+                    case R.id.menuContacts:
+                        navigationView.setCheckedItem(R.id.menuContacts);
+                        tvTitle.setText(getResources().getString(R.string.menu_contacts));
+                        resetMenuTextColor();
+                        changeMenuItemTextColor(menuItem, R.color.menuColorBlue);
+                        changeToolbarColor(R.color.menuColorBlue);
+                        if(contactsFragment == null)
+                        {
+                            contactsFragment = new ContactsFragment();
+                        }
+                        changeFragment(contactsFragment);
                         break;
                     case R.id.menuSetting:
                         break;
