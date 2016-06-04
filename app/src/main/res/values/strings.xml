@@ -20,15 +20,24 @@
     <string name="dialog_choose_avatar_camera_refuse">你拒绝了打开相机的权限，请到设置中修改</string>
     <string name="dialog_choose_avatar_save_avatar_fail">对不起，图片保存失败</string>
     <string name="dialog_choose_avatar_sdcard_not_found">SD卡不存在</string>
+    <string name="dialog_cancel_email_tip">放弃编写邮件？</string>
 
     <string name="activity_user_info_setting_tip">输入您的邮箱地址</string>
-    <string name="user_name_hint">您的邮箱地址</string>
+    <string name="user_name_hint">您的163邮箱地址</string>
+    <string name="password_hint">您的邮箱密码</string>
 
     <string name="new_letter_activity_hint_email_to">收件人</string>
     <string name="new_letter_activity_hint_subject">主题</string>
     <string name="new_letter_activity_hint_say_something">说点什么</string>
+    <string name="new_letter_activity_sending_dialog_tip">发送中..</string>
 
     <string name="toast_email_empty">邮箱不能为空</string>
+    <string name="toast_email_empty_subject">主题不能为空</string>
     <string name="toast_email_format_invalid">邮箱不符合规范</string>
+    <string name="toast_email_password_not_empty">密码不能为空</string>
+    <string name="toast_email_not_163">请输入163邮箱</string>
+    <string name="toast_email_network_un_available">当前网络不可用</string>
+    <string name="toast_email_send_success">邮件发送成功</string>
+    <string name="toast_email_send_fail">邮件发送失败，请检查163邮箱账户密码是否正确</string>
 
 </resources>

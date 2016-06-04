@@ -25,5 +25,10 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:design:23+'//侧滑菜单
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'//动态改变Toolbar和status颜色，并加入动画效果
+    compile 'com.nononsenseapps:filepicker:2.5.2'
     compile 'de.greenrobot:eventbus:2.4.0'
+    compile 'com.mcxiaoke.next:task:1.4.1'
+    compile files('libs/activation.jar')
+    compile files('libs/additionnal.jar')
+    compile files('libs/mail.jar')
 }

@@ -26,6 +26,7 @@ import com.michael.email.dialog.DialogResultListener;
 import com.michael.email.dialog.ListItemDialogFragment;
 import com.michael.email.util.Consts;
 import com.michael.email.util.EmailBus;
+import com.michael.email.util.EmailFormatter;
 import com.michael.email.util.ImageUtils;
 import com.michael.email.util.SharedPreferenceUtils;
 import com.michael.email.util.Toaster;
@@ -42,12 +43,15 @@ public class UserInfoSettingActivity extends AppCompatActivity
 {
 
     private RelativeLayout rlUserName;
+    private RelativeLayout rlPassword;
 
     private EditText etUserName;
+    private EditText etPassword;
 
     private ImageView ivAvatar;
 
     private ImageView ivClearName;
+    private ImageView ivClearPassword;
 
     private Button btnOk;
 
@@ -67,9 +71,12 @@ public class UserInfoSettingActivity extends AppCompatActivity
     private void iniComponent()
     {
         rlUserName = (RelativeLayout) findViewById(R.id.rlUserName);
+        rlPassword = (RelativeLayout) findViewById(R.id.rlPassword);
         etUserName = (EditText) findViewById(R.id.etUserName);
+        etPassword = (EditText) findViewById(R.id.etPassword);
         ivAvatar = (ImageView) findViewById(R.id.ivAvatar);
         ivClearName = (ImageView) findViewById(R.id.ivClearName);
+        ivClearPassword = (ImageView) findViewById(R.id.ivClearPassword);
         btnOk = (Button) findViewById(R.id.btnOk);
 
         etUserName.addTextChangedListener(new TextWatcher()
@@ -99,6 +106,33 @@ public class UserInfoSettingActivity extends AppCompatActivity
             }
         });
 
+        etPassword.addTextChangedListener(new TextWatcher()
+        {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after)
+            {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count)
+            {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s)
+            {
+                if (s.toString().trim().equalsIgnoreCase(""))
+                {
+                    ivClearPassword.setVisibility(View.INVISIBLE);
+                } else
+                {
+                    ivClearPassword.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
         ivAvatar.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -118,6 +152,15 @@ public class UserInfoSettingActivity extends AppCompatActivity
             }
         });
 
+        ivClearPassword.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                etPassword.setText("");
+            }
+        });
+
         btnOk.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -125,15 +168,14 @@ public class UserInfoSettingActivity extends AppCompatActivity
             {
                 saveAvatar();
                 String email = etUserName.getText().toString();
-                if (email != null && !email.isEmpty() && isEmailFormat(email))
+                String password = etPassword.getText().toString();
+                if (email != null && !email.isEmpty() && EmailFormatter.isEmailFormat(email)
+                        && password != null && !password.isEmpty() && is163())
                 {
                     saveEmail();
+                    savePassword();
                     notifyUserInfoChange();
-                    if(isModify)
-                    {
-                        finish();
-                    }
-                    else
+                    if(!isModify)
                     {
                         Intent intent = new Intent(UserInfoSettingActivity.this, MainActivity.class);
                         startActivity(intent);
@@ -144,14 +186,35 @@ public class UserInfoSettingActivity extends AppCompatActivity
                     if (email == null || email.isEmpty())
                     {
                         Toaster.show(getResources().getString(R.string.toast_email_empty));
-                    } else
+                        rlUserName.startAnimation(AnimationUtils.loadAnimation(UserInfoSettingActivity.this, R.anim.shake));
+                    } else if(!EmailFormatter.isEmailFormat(email))
                     {
                         Toaster.show(getResources().getString(R.string.toast_email_format_invalid));
+                        rlUserName.startAnimation(AnimationUtils.loadAnimation(UserInfoSettingActivity.this, R.anim.shake));
+                    } else if(!is163())
+                    {
+                        Toaster.show(getResources().getString(R.string.toast_email_not_163));
+                        rlUserName.startAnimation(AnimationUtils.loadAnimation(UserInfoSettingActivity.this, R.anim.shake));
+                    } else if(password == null || password.isEmpty())
+                    {
+                        Toaster.show(getResources().getString(R.string.toast_email_password_not_empty));
+                        rlPassword.startAnimation(AnimationUtils.loadAnimation(UserInfoSettingActivity.this, R.anim.shake));
                     }
-                    rlUserName.startAnimation(AnimationUtils.loadAnimation(UserInfoSettingActivity.this, R.anim.shake));
                 }
             }
         });
+    }
+
+    /**
+     * 是否是163邮箱
+     * */
+    private boolean is163()
+    {
+        if(etUserName.getText().toString().endsWith("@163.com"))
+        {
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -188,15 +251,31 @@ public class UserInfoSettingActivity extends AppCompatActivity
             etUserName.setText(userEmail);
             etUserName.setSelection(userEmail.length());
         }
+
+        String password = SharedPreferenceUtils.getString(this, Consts.PASSWORD, "");
+        if (password != null)
+        {
+            etPassword.setText(password);
+            etPassword.setSelection(password.length());
+        }
+
         displayAvatar();
     }
 
     /**
-     * 保存起来
+     * 保存用户的邮箱
      */
     private void saveEmail()
     {
         SharedPreferenceUtils.putString(this, Consts.USER_EMAIL, etUserName.getText().toString());
+    }
+
+    /**
+     * 保存用户的密码
+     * */
+    private void savePassword()
+    {
+        SharedPreferenceUtils.putString(this, Consts.PASSWORD, etPassword.getText().toString());
     }
 
     /**
@@ -216,17 +295,6 @@ public class UserInfoSettingActivity extends AppCompatActivity
     private void notifyUserInfoChange()
     {
         EmailBus.getInstance().post(new EmailBus.BusEvent(EmailBus.BUS_ID_REFRESH_USER_INFO));
-    }
-
-    /**
-     * 是否符合邮箱格式
-     */
-    private boolean isEmailFormat(String email)
-    {
-        String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
-        java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
-        java.util.regex.Matcher m = p.matcher(email);
-        return m.matches();
     }
 
     /**
