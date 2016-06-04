@@ -115,8 +115,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         navigationView.setCheckedItem(R.id.menuSend);
                         tvTitle.setText(getResources().getString(R.string.menu_send));
                         resetMenuTextColor();
-                        changeMenuItemTextColor(menuItem, R.color.menuColorGreen);
-                        changeToolbarColor(R.color.menuColorGreen);
+                        changeMenuItemTextColor(menuItem, R.color.menuColorBlue2);
+                        changeToolbarColor(R.color.menuColorBlue2);
                         if(sendFragment == null)
                         {
                             sendFragment = new SendFragment();
