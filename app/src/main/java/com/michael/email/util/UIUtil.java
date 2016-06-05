@@ -40,7 +40,16 @@ public class UIUtil
      */
     public static void startNewLetterActivity(Context context)
     {
+        startNewLetterActivity(context, "");
+    }
+
+    /**
+     * 新邮件
+     */
+    public static void startNewLetterActivity(Context context, String emailTo)
+    {
         Intent intent = new Intent(context, NewLetterActivity.class);
+        intent.putExtra("emailTo", emailTo);
         context.startActivity(intent);
     }
 

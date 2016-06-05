@@ -5,12 +5,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.michael.email.R;
 import com.michael.email.db.DBManagerContact;
 import com.michael.email.model.Contact;
 import com.michael.email.util.EmailBus;
+import com.michael.email.util.UIUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +60,14 @@ public class ContactsFragment extends Fragment
         contactList = new ArrayList<>();
         contactsFragmentAdapter = new ContactsFragmentAdapter(getActivity(), contactList);
         lvContact.setAdapter(contactsFragmentAdapter);
+        lvContact.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                UIUtil.startNewLetterActivity(getActivity(), contactList.get(position).emailAddress);
+            }
+        });
         addEmptyFooter();
         iniData();
         return parentView;

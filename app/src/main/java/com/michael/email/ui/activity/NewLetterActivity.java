@@ -82,6 +82,12 @@ public class NewLetterActivity extends AppCompatActivity implements DialogResult
         etSubject = (EditText) findViewById(R.id.etSubject);
         etContent = (EditText) findViewById(R.id.etContent);
 
+        String emailTo = getIntent().getStringExtra("emailTo");
+        if(emailTo != null && !emailTo.isEmpty())
+        {
+            etEmailTo.setText(emailTo);
+            etEmailTo.setSelection(emailTo.length());
+        }
     }
 
     @Override
