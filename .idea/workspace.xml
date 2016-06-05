@@ -19,26 +19,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e77fc83b-6868-4fa7-aded-0dffcc80f084" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_delete.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/activity/EmailDetailActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/michael/email/util/TimeUtils.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_email_detail.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/menu/email_detail_actionbar.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/michael/email/db/DBManagerEmail.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/michael/email/db/DBManagerEmail.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/component/AttachItem.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/component/AttachItem.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/activity/EmailDetailActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/activity/EmailDetailActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/activity/NewLetterActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/activity/NewLetterActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/fragment/ContactsFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/fragment/ContactsFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/fragment/FlagFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/fragment/FlagFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/fragment/SendFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/fragment/SendFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/fragment/SendFragmentAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/fragment/SendFragmentAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/michael/email/util/UIUtil.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/michael/email/util/UIUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_new_letter.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_new_letter.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_contacts.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_contacts.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_flag.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_flag.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_pending.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_pending.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_send.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_send.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/list_item_send.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/list_item_send.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/michael/email/util/EmailBus.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/michael/email/util/EmailBus.java" />
     </list>
     <ignored path="Email.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -99,17 +86,37 @@
       <file leaf-file-name="EmailDetailActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/activity/EmailDetailActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3778802">
-              <caret line="162" column="33" selection-start-line="162" selection-start-column="33" selection-end-line="162" selection-end-column="33" />
+            <state vertical-scroll-proportion="0.5634328">
+              <caret line="212" column="36" selection-start-line="212" selection-start-column="36" selection-end-line="212" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4025#4209#0" expanded="true" />
-                <element signature="e#4208#4209#0" expanded="true" />
-                <element signature="e#4427#4470#0" expanded="true" />
-                <element signature="e#6535#6567#0" expanded="true" />
-                <element signature="e#6671#6686#0" expanded="true" />
-                <element signature="e#6711#6722#0" expanded="true" />
+                <element signature="e#4065#4249#0" expanded="true" />
+                <element signature="e#4248#4249#0" expanded="true" />
+                <element signature="e#4467#4510#0" expanded="true" />
+                <element signature="e#6688#6720#0" expanded="true" />
+                <element signature="e#6824#6839#0" expanded="true" />
+                <element signature="e#6864#6875#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EmailBus.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/michael/email/util/EmailBus.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="50" column="50" selection-start-line="50" selection-start-column="28" selection-end-line="50" selection-end-column="50" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/activity/MainActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="89" column="0" selection-start-line="82" selection-start-column="4" selection-end-line="89" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -118,7 +125,30 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/fragment/FlagFragment.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="35" column="101" selection-start-line="35" selection-start-column="101" selection-end-line="35" selection-end-column="101" />
+              <caret line="50" column="5" selection-start-line="33" selection-start-column="8" selection-end-line="50" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SendFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/fragment/SendFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="42" column="28" selection-start-line="42" selection-start-column="28" selection-end-line="42" selection-end-column="28" />
+              <folding>
+                <element signature="e#1833#2125#0" expanded="true" />
+                <element signature="e#2124#2125#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ContactsFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/fragment/ContactsFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="73" column="28" selection-start-line="73" selection-start-column="28" selection-end-line="73" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -128,7 +158,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/activity/NewLetterActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="50" column="88" selection-start-line="50" selection-start-column="68" selection-end-line="50" selection-end-column="88" />
+              <caret line="417" column="9" selection-start-line="417" selection-start-column="9" selection-end-line="417" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -157,16 +187,6 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.372549">
-              <caret line="25" column="41" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="41" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -1770,7 +1790,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/com/michael/email/email/MailSenderInfo.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/michael/email/email/MyAuthenticator.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/michael/email/core/SimpleMainSender.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/michael/email/mail/MyAuthenticator.java" />
@@ -1790,20 +1809,17 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/michael/email/base/BaseCompatableAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/michael/email/db/DBHelper.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/michael/email/db/DBManager.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/activity/NewLetterActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/fragment/ContactsFragmentAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/michael/email/db/DBManagerContact.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/list_item_contact.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/menu.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_empty_footer.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/fragment/ContactsFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/ic_star_selector.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/fragment/FlagFragmentAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/activity/EmailDetailAttivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/component/AttachItem.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/michael/email/util/UIUtil.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/fragment/SendFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_new_letter.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/michael/email/util/TimeUtils.java" />
@@ -1814,19 +1830,23 @@
         <option value="$PROJECT_DIR$/app/src/main/res/menu/email_detail_actionbar.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/fragment/SendFragmentAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_send.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/activity/EmailDetailActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_flag.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_pending.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_contacts.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/fragment/FlagFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/main_actionbar.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/activity/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/michael/email/util/EmailBus.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/fragment/FlagFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/fragment/SendFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/fragment/ContactsFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/activity/NewLetterActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/activity/EmailDetailActivity.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="307" />
-    <option name="y" value="68" />
+    <option name="x" value="178" />
+    <option name="y" value="117" />
     <option name="width" value="2234" />
     <option name="height" value="1209" />
   </component>
@@ -2169,10 +2189,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fragment" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -2904,7 +2920,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="307" y="68" width="2234" height="1209" extended-state="0" />
+    <frame x="178" y="117" width="2234" height="1209" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2914,7 +2930,7 @@
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29277217" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35407135" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21408966" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -3209,17 +3225,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/fragment/ContactsFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="48" column="33" selection-start-line="48" selection-start-column="33" selection-end-line="48" selection-end-column="33" />
-          <folding>
-            <element signature="e#695#696#0" expanded="true" />
-            <element signature="e#745#746#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/new_letter_actionbar.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -3241,17 +3246,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="50" column="47" selection-start-line="50" selection-start-column="47" selection-end-line="50" selection-end-column="47" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/fragment/SendFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="28" selection-start-line="24" selection-start-column="28" selection-end-line="24" selection-end-column="28" />
-          <folding>
-            <element signature="e#1427#1719#0" expanded="true" />
-            <element signature="e#1718#1719#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3368,20 +3362,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/activity/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3141593">
-          <caret line="81" column="0" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
-          <folding>
-            <element signature="e#4059#4103#0" expanded="true" />
-            <element signature="e#4834#4878#0" expanded="true" />
-            <element signature="e#5617#5664#0" expanded="true" />
-            <element signature="e#6420#6468#0" expanded="true" />
-            <element signature="e#10071#10114#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.372549">
@@ -3411,24 +3391,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/activity/NewLetterActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="50" column="88" selection-start-line="50" selection-start-column="68" selection-end-line="50" selection-end-column="88" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/fragment/FlagFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="35" column="101" selection-start-line="35" selection-start-column="101" selection-end-line="35" selection-end-column="101" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/michael/email/db/DBManagerEmail.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-10.444445">
@@ -3437,18 +3399,71 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/activity/EmailDetailActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/activity/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3778802">
-          <caret line="162" column="33" selection-start-line="162" selection-start-column="33" selection-end-line="162" selection-end-column="33" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="89" column="0" selection-start-line="82" selection-start-column="4" selection-end-line="89" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/michael/email/util/EmailBus.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="50" column="50" selection-start-line="50" selection-start-column="28" selection-end-line="50" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/fragment/FlagFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="50" column="5" selection-start-line="33" selection-start-column="8" selection-end-line="50" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/fragment/ContactsFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="73" column="28" selection-start-line="73" selection-start-column="28" selection-end-line="73" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/fragment/SendFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="42" column="28" selection-start-line="42" selection-start-column="28" selection-end-line="42" selection-end-column="28" />
+          <folding>
+            <element signature="e#1833#2125#0" expanded="true" />
+            <element signature="e#2124#2125#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/activity/NewLetterActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="417" column="9" selection-start-line="417" selection-start-column="9" selection-end-line="417" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4025#4209#0" expanded="true" />
-            <element signature="e#4208#4209#0" expanded="true" />
-            <element signature="e#4427#4470#0" expanded="true" />
-            <element signature="e#6535#6567#0" expanded="true" />
-            <element signature="e#6671#6686#0" expanded="true" />
-            <element signature="e#6711#6722#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/michael/email/ui/activity/EmailDetailActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5634328">
+          <caret line="212" column="36" selection-start-line="212" selection-start-column="36" selection-end-line="212" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4065#4249#0" expanded="true" />
+            <element signature="e#4248#4249#0" expanded="true" />
+            <element signature="e#4467#4510#0" expanded="true" />
+            <element signature="e#6688#6720#0" expanded="true" />
+            <element signature="e#6824#6839#0" expanded="true" />
+            <element signature="e#6864#6875#0" expanded="true" />
           </folding>
         </state>
       </provider>

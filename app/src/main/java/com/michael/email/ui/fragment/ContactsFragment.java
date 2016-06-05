@@ -10,6 +10,7 @@ import android.widget.ListView;
 import com.michael.email.R;
 import com.michael.email.db.DBManagerContact;
 import com.michael.email.model.Contact;
+import com.michael.email.util.EmailBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +31,23 @@ public class ContactsFragment extends Fragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        EmailBus.getInstance().register(this);
+    }
+
+    public void onEventMainThread(EmailBus.BusEvent busEvent)
+    {
+        if (busEvent.eventId == EmailBus.BUS_ID_REFRESH_CONTACT)
+        {
+            iniData();//刷新一下
+        }
+    }
+
+
+    @Override
+    public void onDestroy()
+    {
+        super.onDestroy();
+        EmailBus.getInstance().unregister(this);
     }
 
     @Override
@@ -41,8 +59,7 @@ public class ContactsFragment extends Fragment
         contactsFragmentAdapter = new ContactsFragmentAdapter(getActivity(), contactList);
         lvContact.setAdapter(contactsFragmentAdapter);
         addEmptyFooter();
-        contactList.addAll(DBManagerContact.getInstance().getContacts());
-        contactsFragmentAdapter.notifyDataSetChanged();
+        iniData();
         return parentView;
     }
 
@@ -52,5 +69,11 @@ public class ContactsFragment extends Fragment
         lvContact.addFooterView(emptyView);
     }
 
+    private void iniData()
+    {
+        contactList.clear();
+        contactList.addAll(DBManagerContact.getInstance().getContacts());
+        contactsFragmentAdapter.notifyDataSetChanged();
+    }
 
 }

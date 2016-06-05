@@ -41,4 +41,12 @@ public class EmailBus
      * 用户修改了个人信息，需要刷新主界面
      */
     public static final int BUS_ID_REFRESH_USER_INFO = 001;
+    /**
+     * 刷新邮件
+     * */
+    public static final int BUS_ID_REFRESH_EMAIL = 002;
+    /**
+     * 刷新联系人
+     * */
+    public static final int BUS_ID_REFRESH_CONTACT = 003;
 }

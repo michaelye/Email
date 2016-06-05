@@ -30,6 +30,7 @@ import com.michael.email.model.Contact;
 import com.michael.email.model.Email;
 import com.michael.email.ui.component.AttachItem;
 import com.michael.email.util.Consts;
+import com.michael.email.util.EmailBus;
 import com.michael.email.util.EmailFormatter;
 import com.michael.email.util.L;
 import com.michael.email.util.NetworkUtil;
@@ -368,8 +369,8 @@ public class NewLetterActivity extends AppCompatActivity implements DialogResult
                 if(success)
                 {
                     Toaster.show(getResources().getString(R.string.toast_email_send_success));
-                    insertEmailToDB(true, System.currentTimeMillis());
-                    insertContactToDB();
+                    insertEmailToDBAndNotify(true, System.currentTimeMillis());
+                    insertContactToDBAndNotify();
                     NewLetterActivity.this.finish();
                 }
                 else
@@ -391,7 +392,7 @@ public class NewLetterActivity extends AppCompatActivity implements DialogResult
     /**
      * 将邮件写入数据库
      * */
-    private void insertEmailToDB(boolean sendNow, long sendTime)
+    private void insertEmailToDBAndNotify(boolean sendNow, long sendTime)
     {
         Email email = new Email();
         email.receiver = etEmailTo.getText().toString();
@@ -403,23 +404,25 @@ public class NewLetterActivity extends AppCompatActivity implements DialogResult
         email.state = sendNow ? 1 : 0;
         email.sender = getUserEmail();
         DBManagerEmail.getInstance().insertEmail(email);
+        EmailBus.getInstance().post(new EmailBus.BusEvent(EmailBus.BUS_ID_REFRESH_EMAIL));
     }
 
     /**
      * 将联系人写入数据库
      * */
-    private void insertContactToDB()
+    private void insertContactToDBAndNotify()
     {
         Contact contact = new Contact();
         contact.emailAddress = etEmailTo.getText().toString();
         if(!DBManagerContact.getInstance().isContactExist(contact.emailAddress))
         {
-            L.d(TAG, "insertContactToDB（）->联系人不存在，执行插入数据的操作");
+            L.d(TAG, "insertContactToDBAndNotify（）->联系人不存在，执行插入数据的操作");
             DBManagerContact.getInstance().insertContact(contact);
+            EmailBus.getInstance().post(new EmailBus.BusEvent(EmailBus.BUS_ID_REFRESH_CONTACT));
         }
         else
         {
-            L.d(TAG, "insertContactToDB（）->联系人存在，不执行插入数据的操作");
+            L.d(TAG, "insertContactToDBAndNotify（）->联系人存在，不执行插入数据的操作");
         }
     }
 

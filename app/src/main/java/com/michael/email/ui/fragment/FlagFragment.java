@@ -10,6 +10,7 @@ import android.widget.ListView;
 import com.michael.email.R;
 import com.michael.email.db.DBManagerEmail;
 import com.michael.email.model.Email;
+import com.michael.email.util.EmailBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +31,23 @@ public class FlagFragment extends Fragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        EmailBus.getInstance().register(this);
+    }
+
+    public void onEventMainThread(EmailBus.BusEvent busEvent)
+    {
+        if (busEvent.eventId == EmailBus.BUS_ID_REFRESH_EMAIL)
+        {
+            iniData();//刷新一下
+        }
+    }
+
+
+    @Override
+    public void onDestroy()
+    {
+        super.onDestroy();
+        EmailBus.getInstance().unregister(this);
     }
 
     @Override
@@ -41,8 +59,7 @@ public class FlagFragment extends Fragment
         sendFragmentAdapter = new SendFragmentAdapter(getActivity(), emailList);
         lvFlag.setAdapter(sendFragmentAdapter);
         addEmptyFooter();
-        emailList.addAll(DBManagerEmail.getInstance().getEmailStar());
-        sendFragmentAdapter.notifyDataSetChanged();
+        iniData();
         return parentView;
     }
 
@@ -50,5 +67,12 @@ public class FlagFragment extends Fragment
     {
         View emptyView = getActivity().getLayoutInflater().inflate(R.layout.layout_empty_footer, null);
         lvFlag.addFooterView(emptyView);
+    }
+
+    private void iniData()
+    {
+        emailList.clear();
+        emailList.addAll(DBManagerEmail.getInstance().getEmailStar());
+        sendFragmentAdapter.notifyDataSetChanged();
     }
 }

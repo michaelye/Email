@@ -22,6 +22,7 @@ import com.michael.email.dialog.DialogResultListener;
 import com.michael.email.model.Email;
 import com.michael.email.ui.component.AttachItem;
 import com.michael.email.util.Consts;
+import com.michael.email.util.EmailBus;
 import com.michael.email.util.ImageUtils;
 import com.michael.email.util.L;
 import com.michael.email.util.StatusThemeUtil;
@@ -163,7 +164,7 @@ public class EmailDetailActivity extends AppCompatActivity implements DialogResu
         switch (item.getItemId())
         {
             case R.id.action_star:
-                addOrCancelStar();
+                addOrCancelStarAndNotify();
                 break;
             case R.id.action_delete:
                 showConfirmDialog();
@@ -178,7 +179,7 @@ public class EmailDetailActivity extends AppCompatActivity implements DialogResu
     /**
      * 添加或取消星星
      * */
-    private void addOrCancelStar()
+    private void addOrCancelStarAndNotify()
     {
         if(emailId != null && !emailId.isEmpty())
         {
@@ -192,6 +193,7 @@ public class EmailDetailActivity extends AppCompatActivity implements DialogResu
                 email.isStar = true;
             }
             DBManagerEmail.getInstance().updateEmail(emailId, email);
+            EmailBus.getInstance().post(new EmailBus.BusEvent(EmailBus.BUS_ID_REFRESH_EMAIL));
             updateStar(email.isStar);
         }
     }
@@ -223,7 +225,7 @@ public class EmailDetailActivity extends AppCompatActivity implements DialogResu
         {
             if (resultCode == RESULT_OK)
             {
-                deleteEmail();
+                deleteEmailAndNotify();
                 finish();
             }
         }
@@ -232,11 +234,12 @@ public class EmailDetailActivity extends AppCompatActivity implements DialogResu
     /**
      * 删除Email
      * */
-    private void deleteEmail()
+    private void deleteEmailAndNotify()
     {
         if(emailId != null && !emailId.isEmpty())
         {
             DBManagerEmail.getInstance().deleteEmail(emailId);
+            EmailBus.getInstance().post(new EmailBus.BusEvent(EmailBus.BUS_ID_REFRESH_EMAIL));
         }
     }
 }
