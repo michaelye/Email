@@ -71,6 +71,14 @@ public class AttachItem extends LinearLayout
         tvAttachPath.setText(path);
     }
 
+    /**
+     * 删除按钮是否可见
+     * */
+    public void setDeleteIconVisibility(int visibility)
+    {
+        ivDeleteAttach.setVisibility(visibility);
+    }
+
     private OnAttachDeleteListener onAttachDeleteListener;
 
     public void setOnAttachDeleteListener(OnAttachDeleteListener onAttachDeleteListener)

@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.michael.email.R;
 import com.michael.email.base.BaseCompatableAdapter;
 import com.michael.email.model.Email;
+import com.michael.email.util.TimeUtils;
 
 import java.util.List;
 
@@ -54,19 +55,24 @@ public class SendFragmentAdapter extends BaseCompatableAdapter<Email>
         }
 
         Email email = super.getItem(position);
-        viewHolder.tvSubject.setText(email.subject);
-        viewHolder.tvContent.setText(email.content);
-        viewHolder.tvTime.setText(""+email.sendTime);
+
+        String subject = email.subject;
+        viewHolder.tvSubject.setText(subject == null ? "" : subject);
+        String content = email.content;
+        viewHolder.tvContent.setText(content == null ? "" :content);
+        String time = email.sendTime+"";
+        viewHolder.tvTime.setText(time == null ? "" : TimeUtils.getFormatTime(email.sendTime));
+
         List<String> attachPaths = email.attachPaths;
         if(attachPaths == null || attachPaths.isEmpty())
         {
-            viewHolder.ivAttachLogo.setVisibility(View.GONE);
+            viewHolder.ivAttachLogo.setVisibility(View.INVISIBLE);
         }
         else
         {
             viewHolder.ivAttachLogo.setVisibility(View.VISIBLE);
         }
-        viewHolder.ivStarLogo.setVisibility(email.isStar ? View.VISIBLE : View.GONE);
+        viewHolder.ivStarLogo.setVisibility(email.isStar ? View.VISIBLE : View.INVISIBLE);
         return convertView;
     }
 

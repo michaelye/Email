@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Environment;
 
+import com.michael.email.ui.activity.EmailDetailActivity;
 import com.michael.email.ui.activity.MainActivity;
 import com.michael.email.ui.activity.NewLetterActivity;
 import com.michael.email.ui.activity.UserInfoSettingActivity;
@@ -40,6 +41,17 @@ public class UIUtil
     public static void startNewLetterActivity(Context context)
     {
         Intent intent = new Intent(context, NewLetterActivity.class);
+        context.startActivity(intent);
+    }
+
+    /**
+     * 邮件详情页面
+     * @param emailId
+     */
+    public static void startEmailDetailActivity(Context context, String emailId)
+    {
+        Intent intent = new Intent(context, EmailDetailActivity.class);
+        intent.putExtra("emailId", emailId);
         context.startActivity(intent);
     }
 

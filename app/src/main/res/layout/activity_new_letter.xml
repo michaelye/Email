@@ -29,7 +29,6 @@
 
         <View
             style="@style/list_view_line"
-            android:layout_height="1dip"
             />
 
         <RelativeLayout
@@ -50,7 +49,6 @@
 
             <View
                 style="@style/list_view_line"
-                android:layout_height="1dip"
                 android:layout_below="@+id/llAttach"
                 />
 

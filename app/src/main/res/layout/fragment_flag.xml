@@ -4,10 +4,11 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <TextView
+    <ListView
+        android:id="@+id/lvFlag"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Flag"/>
+        android:dividerHeight="1px"
+        />
 
 </LinearLayout>

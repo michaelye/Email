@@ -107,7 +107,7 @@ public class DBManagerEmail
 	/**
 	 * 更新缓存
 	 * */
-	public void updateEmail(long _id, Email email)
+	public void updateEmail(String _id, Email email)
 	{
 		if (email != null)
 		{
@@ -219,7 +219,7 @@ public class DBManagerEmail
 	/**
 	 * 获取缓存
 	 * */
-	public Email getEmail(int _id)
+	public Email getEmail(String _id)
 	{
 		SQLiteDatabase db = helper.getWritableDatabase();
 		String sql = "SELECT * FROM " + DBHelper.TABLE_NAME_EMAIL + " WHERE " + "_id" + " = " + _id;
@@ -271,7 +271,7 @@ public class DBManagerEmail
 	/**
 	 * 删除缓存
 	 * */
-	public void deleteEmail(int _id)
+	public void deleteEmail(String _id)
 	{
 		SQLiteDatabase db = helper.getReadableDatabase();
 		String sql = "DELETE FROM " + DBHelper.TABLE_NAME_EMAIL + " WHERE " + "_id" + " = "+ _id;

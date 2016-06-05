@@ -11,6 +11,8 @@
     <string name="menu_about">关于</string>
     <string name="menu_attach_tip">添加附件</string>
     <string name="menu_send_tip">发送</string>
+    <string name="menu_star">加星</string>
+    <string name="menu_delete">删除邮件</string>
 
     <string name="ok">确认</string>
     <string name="cancel">取消</string>
@@ -21,6 +23,7 @@
     <string name="dialog_choose_avatar_save_avatar_fail">对不起，图片保存失败</string>
     <string name="dialog_choose_avatar_sdcard_not_found">SD卡不存在</string>
     <string name="dialog_cancel_email_tip">放弃编写邮件？</string>
+    <string name="dialog_delete_email_tip">删除该邮件？</string>
 
     <string name="activity_user_info_setting_tip">输入您的邮箱地址</string>
     <string name="user_name_hint">您的163邮箱地址</string>
@@ -30,6 +33,8 @@
     <string name="new_letter_activity_hint_subject">主题</string>
     <string name="new_letter_activity_hint_say_something">说点什么</string>
     <string name="new_letter_activity_sending_dialog_tip">发送中..</string>
+
+    <string name="email_detail_activity_attach">附件:</string>
 
     <string name="toast_email_empty">邮箱不能为空</string>
     <string name="toast_email_empty_subject">主题不能为空</string>

@@ -26,7 +26,7 @@
         <activity
             android:name=".ui.activity.WelComeActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/MyAppTheme" >
             <!--<intent-filter >-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
 
@@ -47,6 +47,17 @@
 
         <activity
             android:name=".ui.activity.NewLetterActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeWhiteActionBar" >
+            <!--<intent-filter >-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
+
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+
+        <activity
+            android:name=".ui.activity.EmailDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeWhiteActionBar" >
             <!--<intent-filter >-->

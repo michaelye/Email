@@ -5,11 +5,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.michael.email.R;
 import com.michael.email.db.DBManagerEmail;
 import com.michael.email.model.Email;
+import com.michael.email.util.UIUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +45,15 @@ public class SendFragment extends Fragment
         addEmptyFooter();
         emailList.addAll(DBManagerEmail.getInstance().getEmailSend());
         sendFragmentAdapter.notifyDataSetChanged();
+
+        lvSend.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                UIUtil.startEmailDetailActivity(getActivity(), emailList.get(position).id);
+            }
+        });
 
         return parentView;
     }
