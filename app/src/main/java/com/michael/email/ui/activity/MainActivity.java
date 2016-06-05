@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
@@ -35,6 +34,7 @@ import com.michael.email.ui.fragment.SendFragment;
 import com.michael.email.util.Consts;
 import com.michael.email.util.EmailBus;
 import com.michael.email.util.ImageUtils;
+import com.michael.email.util.L;
 import com.michael.email.util.SharedPreferenceUtils;
 import com.michael.email.util.UIUtil;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
@@ -54,13 +54,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private DrawerLayout drawerLayout;
     private ImageView ivNewLetter;
     private SystemBarTintManager tintManager;
-    /**发送过的邮件*/
+    /**
+     * 发送过的邮件
+     */
     private SendFragment sendFragment;
-    /**加星星的邮件*/
+    /**
+     * 加星星的邮件
+     */
     private FlagFragment flagFragment;
-    /**准备发送中的邮件*/
+    /**
+     * 准备发送中的邮件
+     */
     private PendingFragment pendingFragment;
-    /**联系人*/
+    /**
+     * 联系人
+     */
     private ContactsFragment contactsFragment;
 
     @Override
@@ -109,6 +117,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     return false;
                 }
                 resetMenuTextColor();
+                Fragment lastFragment = currentFragment;
                 switch (menuItem.getItemId())
                 {
                     case R.id.menuSend:
@@ -117,23 +126,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         resetMenuTextColor();
                         changeMenuItemTextColor(menuItem, R.color.menuColorBlue2);
                         changeToolbarColor(R.color.menuColorBlue2);
-                        if(sendFragment == null)
+                        if (sendFragment == null)
                         {
+                            L.e(TAG, "************ sendFragment is null");
                             sendFragment = new SendFragment();
                         }
-                        changeFragment(sendFragment);
+                        currentFragment = sendFragment;
+                        changeFragment(lastFragment);
                         break;
                     case R.id.menuFlag:
                         navigationView.setCheckedItem(R.id.menuFlag);
                         tvTitle.setText(getResources().getString(R.string.menu_flag));
                         resetMenuTextColor();
-                        changeMenuItemTextColor(menuItem, R.color.menuColorRed);
-                        changeToolbarColor(R.color.menuColorRed);
-                        if(flagFragment == null)
+                        changeMenuItemTextColor(menuItem, R.color.menuColorYellow);
+                        changeToolbarColor(R.color.menuColorYellow);
+                        if (flagFragment == null)
                         {
+                            L.e(TAG, "************ flagFragment is null");
                             flagFragment = new FlagFragment();
                         }
-                        changeFragment(flagFragment);
+                        currentFragment = flagFragment;
+                        changeFragment(lastFragment);
                         break;
                     case R.id.menuPending:
                         navigationView.setCheckedItem(R.id.menuPending);
@@ -141,11 +154,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         resetMenuTextColor();
                         changeMenuItemTextColor(menuItem, R.color.menuColorOrange);
                         changeToolbarColor(R.color.menuColorOrange);
-                        if(pendingFragment == null)
+                        if (pendingFragment == null)
                         {
+                            L.e(TAG, "************ pendingFragment is null");
                             pendingFragment = new PendingFragment();
                         }
-                        changeFragment(pendingFragment);
+                        currentFragment = pendingFragment;
+                        changeFragment(lastFragment);
                         break;
                     case R.id.menuContacts:
                         navigationView.setCheckedItem(R.id.menuContacts);
@@ -153,11 +168,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         resetMenuTextColor();
                         changeMenuItemTextColor(menuItem, R.color.menuColorBlue);
                         changeToolbarColor(R.color.menuColorBlue);
-                        if(contactsFragment == null)
+                        if (contactsFragment == null)
                         {
+                            L.e(TAG, "************ contactsFragment is null");
                             contactsFragment = new ContactsFragment();
                         }
-                        changeFragment(contactsFragment);
+                        currentFragment = contactsFragment;
+                        changeFragment(lastFragment);
                         break;
                     case R.id.menuSetting:
                         break;
@@ -172,28 +189,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setDefaultCheckedMenu();
     }
 
+    /**当前的Fragment*/
+    Fragment currentFragment = null;
+
     /**
      * Fragment之间的切换
-     * */
-    private void changeFragment(Fragment fragment)
+     */
+    private void changeFragment(Fragment lastFragment)
     {
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction transaction = fm.beginTransaction();
-        transaction.replace(R.id.flContainer, fragment);
-        transaction.commit();
+//        FragmentManager fm = getSupportFragmentManager();
+//        FragmentTransaction transaction = fm.beginTransaction();
+//        transaction.replace(R.id.flContainer, fragment);
+//        transaction.commit();
+
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        if (lastFragment != null)
+        {
+            fragmentTransaction.hide(lastFragment);
+        }
+        if (!currentFragment.isAdded())
+        {
+            fragmentTransaction.add(R.id.flContainer, currentFragment).commit();
+        } else
+        {
+            fragmentTransaction.show(currentFragment).commit();
+        }
     }
 
     private TextView tvTitle;
 
     /**
      * Toolbar里面的内容是自己定制的
-     * */
+     */
     private void iniToolBar()
     {
         View viewToolBar = getLayoutInflater().inflate(R.layout.layout_tool_bar, null);
         toolBar.addView(viewToolBar);
         viewToolBar.setLayoutParams(new Toolbar.LayoutParams(Toolbar.LayoutParams.MATCH_PARENT, Toolbar.LayoutParams.WRAP_CONTENT));
-        RelativeLayout rlMenu = (RelativeLayout)viewToolBar.findViewById(R.id.rlMenu);
+        RelativeLayout rlMenu = (RelativeLayout) viewToolBar.findViewById(R.id.rlMenu);
         rlMenu.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -202,19 +235,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 drawerLayout.openDrawer(GravityCompat.START);
             }
         });
-        tvTitle = (TextView)viewToolBar.findViewById(R.id.tvTitle);
+        tvTitle = (TextView) viewToolBar.findViewById(R.id.tvTitle);
     }
 
     private ImageView ivAvatar;
+
     /**
      * 头像和Email所在的Header
-     * */
+     */
     private void iniNavigationViewHeader()
     {
         View headerLayout = navigationView.getHeaderView(0);
-        ivAvatar = (ImageView)headerLayout.findViewById(R.id.ivAvatar);
+        ivAvatar = (ImageView) headerLayout.findViewById(R.id.ivAvatar);
         displayAvatar();
-        TextView tvEmail = (TextView)headerLayout.findViewById(R.id.tvEmail);
+        TextView tvEmail = (TextView) headerLayout.findViewById(R.id.tvEmail);
         tvEmail.setText(SharedPreferenceUtils.getString(this, Consts.USER_EMAIL, ""));
         tvEmail.setOnClickListener(this);
         ivAvatar.setOnClickListener(this);
@@ -300,13 +334,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     /**
      * 改变ToolBar的颜色
-     *
+     * <p/>
      * 这里同时改变了Toolbar和statusbar的颜色
-     * */
+     */
     private void changeToolbarColor(final int newToolBarColor)
     {
         Integer colorTo = Color.parseColor(getResources().getString(newToolBarColor));
-        if(currentToolBarColor == 0)
+        if (currentToolBarColor == 0)
         {
             currentToolBarColor = Color.parseColor(getResources().getString(getDefaultToolBarColor()));
         }

@@ -8,7 +8,7 @@
             android:title="@string/menu_send"/>
         <item
             android:id="@+id/menuFlag"
-            android:icon="@drawable/ic_menu_flag"
+            android:icon="@drawable/ic_star_yellow"
             android:title="@string/menu_flag"
             />
 

@@ -82,7 +82,7 @@
             android:gravity="top"
             android:hint="@string/new_letter_activity_hint_say_something"
             android:imeOptions="actionDone"
-            android:inputType="text"
+            android:inputType="textMultiLine"
             android:paddingBottom="12dip"
             android:paddingLeft="12dip"
             android:paddingRight="12dip"

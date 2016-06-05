@@ -20,10 +20,14 @@ import android.widget.RelativeLayout;
 import com.mcxiaoke.next.task.SimpleTaskCallback;
 import com.mcxiaoke.next.task.TaskBuilder;
 import com.michael.email.R;
+import com.michael.email.db.DBManagerContact;
+import com.michael.email.db.DBManagerEmail;
 import com.michael.email.dialog.AlertDialogFragment;
 import com.michael.email.dialog.DialogResultListener;
 import com.michael.email.mail.MailSenderInfo;
 import com.michael.email.mail.SimpleMainSender;
+import com.michael.email.model.Contact;
+import com.michael.email.model.Email;
 import com.michael.email.ui.component.AttachItem;
 import com.michael.email.util.Consts;
 import com.michael.email.util.EmailFormatter;
@@ -364,13 +368,14 @@ public class NewLetterActivity extends AppCompatActivity implements DialogResult
                 if(success)
                 {
                     Toaster.show(getResources().getString(R.string.toast_email_send_success));
+                    insertEmailToDB(true, System.currentTimeMillis());
+                    insertContactToDB();
                     NewLetterActivity.this.finish();
                 }
                 else
                 {
                     Toaster.show(getResources().getString(R.string.toast_email_send_fail), true);
                 }
-                //TODO 写入数据库到本地
             }
 
             @Override
@@ -381,6 +386,41 @@ public class NewLetterActivity extends AppCompatActivity implements DialogResult
                 pdLoading.dismiss();
             }
         }, TAG).start();
+    }
+
+    /**
+     * 将邮件写入数据库
+     * */
+    private void insertEmailToDB(boolean sendNow, long sendTime)
+    {
+        Email email = new Email();
+        email.receiver = etEmailTo.getText().toString();
+        email.subject = etSubject.getText().toString();
+        email.content = etContent.getText().toString();
+        email.attachPaths = attachPaths;
+        email.isStar = false;
+        email.sendTime = sendTime;// 让用户选时间
+        email.state = sendNow ? 1 : 0;
+        email.sender = getUserEmail();
+        DBManagerEmail.getInstance().insertEmail(email);
+    }
+
+    /**
+     * 将联系人写入数据库
+     * */
+    private void insertContactToDB()
+    {
+        Contact contact = new Contact();
+        contact.emailAddress = etEmailTo.getText().toString();
+        if(!DBManagerContact.getInstance().isContactExist(contact.emailAddress))
+        {
+            L.d(TAG, "insertContactToDB（）->联系人不存在，执行插入数据的操作");
+            DBManagerContact.getInstance().insertContact(contact);
+        }
+        else
+        {
+            L.d(TAG, "insertContactToDB（）->联系人存在，不执行插入数据的操作");
+        }
     }
 
 //    private void sendEmailAsyncTask(final String[] emailTo, final String subject, final String content, final String[] attachFileNames)
