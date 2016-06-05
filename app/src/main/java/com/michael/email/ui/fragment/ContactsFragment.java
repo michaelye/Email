@@ -40,10 +40,16 @@ public class ContactsFragment extends Fragment
         contactList = new ArrayList<>();
         contactsFragmentAdapter = new ContactsFragmentAdapter(getActivity(), contactList);
         lvContact.setAdapter(contactsFragmentAdapter);
-
+        addEmptyFooter();
         contactList.addAll(DBManagerContact.getInstance().getContacts());
         contactsFragmentAdapter.notifyDataSetChanged();
         return parentView;
+    }
+
+    private void addEmptyFooter()
+    {
+        View emptyView = getActivity().getLayoutInflater().inflate(R.layout.layout_empty_footer, null);
+        lvContact.addFooterView(emptyView);
     }
 
 

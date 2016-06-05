@@ -40,11 +40,17 @@ public class SendFragment extends Fragment
         emailList = new ArrayList<>();
         sendFragmentAdapter = new SendFragmentAdapter(getActivity(), emailList);
         lvSend.setAdapter(sendFragmentAdapter);
-
+        addEmptyFooter();
         emailList.addAll(DBManagerEmail.getInstance().getEmailSend());
         sendFragmentAdapter.notifyDataSetChanged();
 
         return parentView;
+    }
+
+    private void addEmptyFooter()
+    {
+        View emptyView = getActivity().getLayoutInflater().inflate(R.layout.layout_empty_footer, null);
+        lvSend.addFooterView(emptyView);
     }
 
 }
