@@ -49,4 +49,8 @@ public class EmailBus
      * 刷新联系人
      * */
     public static final int BUS_ID_REFRESH_CONTACT = 003;
+    /**
+     * 刷新待发送
+     * */
+    public static final int BUS_ID_REFRESH_PENDING = 004;
 }

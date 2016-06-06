@@ -49,8 +49,9 @@ public class DBManagerEmail
 	/**
 	 * 插入缓存,如果存在就删除
 	 * */
-	public void insertEmail(Email email)
+	public long insertEmail(Email email)
 	{
+		long rowId = -1;
 		if (email != null)
 		{
 			String sql = new StringBuilder("INSERT INTO ")
@@ -76,10 +77,11 @@ public class DBManagerEmail
 			insertStmt.bindLong(6, email.isStar == true ? 1 : 0);
 			insertStmt.bindLong(7, email.state);
 			insertStmt.bindLong(8, email.sendTime);
-			insertStmt.executeInsert();
+			rowId = insertStmt.executeInsert();
 			db.close();
 			L.e(TAG, "插入缓存");
 		}
+		return rowId;
 	}
 
 	/**
@@ -173,7 +175,7 @@ public class DBManagerEmail
 				sql = new StringBuilder("SELECT * FROM ").append(DBHelper.TABLE_NAME_EMAIL).append(" WHERE ").append(DBHelper.FIELD_EMAIL_IS_STAR).append(" = 1").append(" order by ").append("TIMESTAMP DESC").toString();
                 break;
             case TYPE_PENDING:
-				sql = new StringBuilder("SELECT * FROM ").append(DBHelper.TABLE_NAME_EMAIL).append(" WHERE ").append(DBHelper.FIELD_EMAIL_STATE).append(" = 1").append(" order by ").append("TIMESTAMP DESC").toString();
+				sql = new StringBuilder("SELECT * FROM ").append(DBHelper.TABLE_NAME_EMAIL).append(" WHERE ").append(DBHelper.FIELD_EMAIL_STATE).append(" = 0").append(" order by ").append("TIMESTAMP DESC").toString();
                 break;
         }
         Cursor cursor = db.rawQuery(sql, new String[] {});

@@ -28,6 +28,7 @@ dependencies {
     compile 'com.nononsenseapps:filepicker:2.5.2'
     compile 'de.greenrobot:eventbus:2.4.0'
     compile 'com.mcxiaoke.next:task:1.4.1'
+    compile 'com.github.jjobes:slideDateTimePicker:1.0.2'
     compile files('libs/activation.jar')
     compile files('libs/additionnal.jar')
     compile files('libs/mail.jar')

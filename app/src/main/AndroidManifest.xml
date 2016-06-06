@@ -77,6 +77,11 @@
             </intent-filter>
         </activity>
 
+        <!-- android:process=":remote": 新开一个进程  注意包名称 -->
+        <receiver
+            android:name="com.michael.email.receiver.AlarmReceiver"
+            android:process=":remote" />
+
     </application>
 
 </manifest>

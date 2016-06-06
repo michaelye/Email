@@ -16,4 +16,19 @@ public class Email
     public boolean isStar;//是否加星
     public int state;//状态 0未发送 1已发送
     public Long sendTime;//发送时间
+
+    @Override
+    public String toString()
+    {
+        return "id:"+id
+                +"receiver:"+receiver
+                +"sender:"+sender
+                +"subject:"+subject
+                +"content:"+content
+                +"attachPaths:"+attachPaths
+                +"isStar:"+isStar
+                +"state:"+state
+                +"sendTime:"+sendTime
+                ;
+    }
 }

@@ -9,6 +9,7 @@
     <string name="menu_other">其它</string>
     <string name="menu_setting">设置</string>
     <string name="menu_about">关于</string>
+    <string name="menu_clock_tip">设置定时发送</string>
     <string name="menu_attach_tip">添加附件</string>
     <string name="menu_send_tip">发送</string>
     <string name="menu_star">加星</string>
@@ -34,6 +35,11 @@
     <string name="new_letter_activity_hint_say_something">说点什么</string>
     <string name="new_letter_activity_sending_dialog_tip">发送中..</string>
 
+    <string name="notification_tip_success">邮件发送成功</string>
+    <string name="notification_tip_fail_not_net">检测到无网络，邮件发送失败</string>
+    <string name="notification_tip_fail">邮件发送失败</string>
+    <string name="notification_tip_fail_email_empty">获取邮件内容为空，邮件发送失败</string>
+
     <string name="email_detail_activity_attach">附件:</string>
 
     <string name="toast_email_empty">邮箱不能为空</string>
@@ -44,5 +50,7 @@
     <string name="toast_email_network_un_available">当前网络不可用</string>
     <string name="toast_email_send_success">邮件发送成功</string>
     <string name="toast_email_send_fail">邮件发送失败，请检查163邮箱账户密码是否正确</string>
+    <string name="toast_email_choose_time_fail">定时邮件时间必须大于当前时间</string>
+    <string name="toast_email_choose_time_again">定时邮件时间必须大于当前时间，请重新选择发送时间</string>
 
 </resources>

@@ -14,20 +14,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
-import com.mcxiaoke.next.task.SimpleTaskCallback;
-import com.mcxiaoke.next.task.TaskBuilder;
+import com.github.jjobes.slidedatetimepicker.SlideDateTimeListener;
+import com.github.jjobes.slidedatetimepicker.SlideDateTimePicker;
 import com.michael.email.R;
-import com.michael.email.db.DBManagerContact;
+import com.michael.email.SendEmailTask;
 import com.michael.email.db.DBManagerEmail;
 import com.michael.email.dialog.AlertDialogFragment;
 import com.michael.email.dialog.DialogResultListener;
-import com.michael.email.mail.MailSenderInfo;
-import com.michael.email.mail.SimpleMainSender;
-import com.michael.email.model.Contact;
 import com.michael.email.model.Email;
+import com.michael.email.receiver.AlarmClockManager;
 import com.michael.email.ui.component.AttachItem;
 import com.michael.email.util.Consts;
 import com.michael.email.util.EmailBus;
@@ -36,13 +36,15 @@ import com.michael.email.util.L;
 import com.michael.email.util.NetworkUtil;
 import com.michael.email.util.SharedPreferenceUtils;
 import com.michael.email.util.StatusThemeUtil;
+import com.michael.email.util.TimeUtils;
 import com.michael.email.util.Toaster;
 import com.michael.email.util.UIUtil;
 import com.nononsenseapps.filepicker.FilePickerActivity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
-import java.util.concurrent.Callable;
 
 /**
  * 写邮件界面
@@ -60,6 +62,15 @@ public class NewLetterActivity extends AppCompatActivity implements DialogResult
 
     private RelativeLayout rlAttach;
     private LinearLayout llAttach;
+
+    private LinearLayout llClock;
+    private TextView tvClock;
+    private ImageView ivClockDelete;
+
+    /**
+     * 定时发送的时间
+     */
+    private long pendingTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -81,9 +92,23 @@ public class NewLetterActivity extends AppCompatActivity implements DialogResult
         etEmailTo = (EditText) findViewById(R.id.etEmailTo);
         etSubject = (EditText) findViewById(R.id.etSubject);
         etContent = (EditText) findViewById(R.id.etContent);
+        llClock = (LinearLayout) findViewById(R.id.llClock);
+        tvClock = (TextView) findViewById(R.id.tvClock);
+        ivClockDelete = (ImageView) findViewById(R.id.ivClockDelete);
+
+        ivClockDelete.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                pendingTime = 0;
+                llClock.setVisibility(View.GONE);
+                tvClock.setText("");
+            }
+        });
 
         String emailTo = getIntent().getStringExtra("emailTo");
-        if(emailTo != null && !emailTo.isEmpty())
+        if (emailTo != null && !emailTo.isEmpty())
         {
             etEmailTo.setText(emailTo);
             etEmailTo.setSelection(emailTo.length());
@@ -105,28 +130,74 @@ public class NewLetterActivity extends AppCompatActivity implements DialogResult
     {
         switch (item.getItemId())
         {
+            case R.id.action_clock:
+                showDateAndTimePickerDialog();
+                break;
             case R.id.action_attach:
                 UIUtil.startFilePickerActivity(NewLetterActivity.this, REQUEST_DIRECTORY);
                 break;
             case R.id.action_send:
                 if (checkEmail())
                 {
-                    if(NetworkUtil.isConnected(NewLetterActivity.this))
+                    if (pendingTime > 0)//说明用户要定时发送
                     {
-                        sendEmailTask(new String[]{etEmailTo.getText().toString()}, etSubject.getText().toString(), etContent.getText().toString(), attachPaths.toArray(new String[0]));
-                    }
-                    else
+                        //TODO 保存数据到本地，状态为未发送，设置一个AlarmClock，AlarmClock触发的时候，调用Service得到本地的Email，然后发送邮件
+                        if(pendingTime > System.currentTimeMillis())
+                        {
+                            saveToLocalAndPending(new String[]{etEmailTo.getText().toString()}, etSubject.getText().toString(), etContent.getText().toString(), attachPaths.toArray(new String[0]));
+                            this.finish();
+                        }
+                        else
+                        {
+                            Toaster.show(getResources().getString(R.string.toast_email_choose_time_again));
+                        }
+                    } else
                     {
-                        Toaster.show(getResources().getString(R.string.toast_email_network_un_available));
+                        if (NetworkUtil.isConnected(NewLetterActivity.this))
+                        {
+                            final ProgressDialog pdLoading = new ProgressDialog(NewLetterActivity.this);
+                            new SendEmailTask().send(NewLetterActivity.this, new String[]{etEmailTo.getText().toString()}, etSubject.getText().toString(), etContent.getText().toString(), attachPaths.toArray(new String[0])).setOnTaskStateListener(new SendEmailTask.OnTaskStateListener()
+                            {
+                                @Override
+                                public void onTaskStarted()
+                                {
+                                    pdLoading.setMessage(getResources().getString(R.string.new_letter_activity_sending_dialog_tip));
+                                    pdLoading.setCancelable(false);
+                                    pdLoading.setCanceledOnTouchOutside(false);
+                                    pdLoading.show();
+                                }
+
+                                @Override
+                                public void onTaskSuccess()
+                                {
+                                    Toaster.show(getResources().getString(R.string.toast_email_send_success));
+                                    NewLetterActivity.this.finish();
+                                }
+
+                                @Override
+                                public void onTaskFail()
+                                {
+                                    Toaster.show(getResources().getString(R.string.toast_email_send_fail), true);
+                                }
+
+                                @Override
+                                public void onTaskEnd()
+                                {
+                                    pdLoading.dismiss();
+                                }
+                            });
+                        } else
+                        {
+                            Toaster.show(getResources().getString(R.string.toast_email_network_un_available));
+                        }
                     }
                 }
                 break;
             case android.R.id.home:
-                if(needConfirmDialog())
+                if (needConfirmDialog())
                 {
                     showConfirmDialog();
-                }
-                else
+                } else
                 {
                     finish();
                 }
@@ -136,14 +207,78 @@ public class NewLetterActivity extends AppCompatActivity implements DialogResult
     }
 
     /**
-     * 是否需要一个对话框提醒用户
+     * 将邮件保存到本地
      * */
+    private void saveToLocalAndPending(final String[] emailTo, final String subject, final String content, final String[] attachFileNames)
+    {
+        Email email = new Email();
+        email.receiver = emailTo[0];
+        email.subject = subject;
+        email.content = content;
+        email.attachPaths = new ArrayList<>(Arrays.asList(attachFileNames));
+        email.isStar = false;
+        email.sendTime = pendingTime;// 发送时间
+        email.state = 0;
+        email.sender = getUserEmail();
+        long rowId = DBManagerEmail.getInstance().insertEmail(email);//邮件的id
+        EmailBus.getInstance().post(new EmailBus.BusEvent(EmailBus.BUS_ID_REFRESH_PENDING));
+        AlarmClockManager.setClock(this, rowId, pendingTime);
+        Toaster.show("邮件将于"+TimeUtils.getFormatTime(pendingTime)+"发送");
+    }
+
+    /**
+     * 用户设置的Email地址
+     */
+    private String getUserEmail()
+    {
+        return SharedPreferenceUtils.getString(this, Consts.USER_EMAIL, "");
+    }
+
+    /**
+     * 日期时间选择器
+     */
+    private void showDateAndTimePickerDialog()
+    {
+        new SlideDateTimePicker.Builder(getSupportFragmentManager())
+                .setListener(listener)
+                .setInitialDate(new Date())
+                .build()
+                .show();
+    }
+
+    private SlideDateTimeListener listener = new SlideDateTimeListener()
+    {
+
+        @Override
+        public void onDateTimeSet(Date date)
+        {
+            if (date.getTime() < System.currentTimeMillis())
+            {
+                Toaster.show(getResources().getString(R.string.toast_email_choose_time_fail));
+            } else
+            {
+                llClock.setVisibility(View.VISIBLE);
+                tvClock.setText("发送时间：" + TimeUtils.getFormatTime(date.getTime()));
+                pendingTime = date.getTime();
+            }
+        }
+
+        @Override
+        public void onDateTimeCancel()
+        {
+
+        }
+    };
+
+    /**
+     * 是否需要一个对话框提醒用户
+     */
     private boolean needConfirmDialog()
     {
         String emailTo = etEmailTo.getText().toString();
         String subject = etSubject.getText().toString();
         String content = etContent.getText().toString();
-        if((emailTo != null && !emailTo.isEmpty())
+        if ((emailTo != null && !emailTo.isEmpty())
                 || (subject != null && !subject.isEmpty())
                 || (content != null && !content.isEmpty())
                 || attachPaths.size() > 0)
@@ -155,7 +290,7 @@ public class NewLetterActivity extends AppCompatActivity implements DialogResult
 
     /**
      * 放弃编写邮件的提醒对话框
-     * */
+     */
     private int REQUEST_GIVE_UP_EMAIL = 0;
 
     private void showConfirmDialog()
@@ -243,7 +378,7 @@ public class NewLetterActivity extends AppCompatActivity implements DialogResult
     {
         if (uri != null)
         {
-            L.e(TAG, "addAttachPathAndRefresh()->"+uri.getPath());
+            L.e(TAG, "addAttachPathAndRefresh()->" + uri.getPath());
             attachPaths.add(uri.getPath());
             refreshAttachList();
         }
@@ -251,12 +386,12 @@ public class NewLetterActivity extends AppCompatActivity implements DialogResult
 
     /**
      * 移除附件地址
-     * */
+     */
     private void removeAttachPathAndRefresh(int position)
     {
-        if(attachPaths != null && !attachPaths.isEmpty() && attachPaths.get(position) != null)
+        if (attachPaths != null && !attachPaths.isEmpty() && attachPaths.get(position) != null)
         {
-            L.e(TAG, "removeAttachPathAndRefresh()->pos:"+position);
+            L.e(TAG, "removeAttachPathAndRefresh()->pos:" + position);
             attachPaths.remove(position);
         }
         refreshAttachList();
@@ -267,7 +402,7 @@ public class NewLetterActivity extends AppCompatActivity implements DialogResult
      */
     private void refreshAttachList()
     {
-        L.e(TAG, "refreshAttachList()->attachPaths:"+attachPaths.size());
+        L.e(TAG, "refreshAttachList()->attachPaths:" + attachPaths.size());
         llAttach.removeAllViews();
         if (attachPaths == null || attachPaths.isEmpty())
         {
@@ -293,7 +428,7 @@ public class NewLetterActivity extends AppCompatActivity implements DialogResult
                             removeAttachPathAndRefresh(position);
                         }
                     });
-                    L.d(TAG, "addView:"+attachPath);
+                    L.d(TAG, "addView:" + attachPath);
                     llAttach.addView(attachItem);
                     llAttach.invalidate();
                 }
@@ -329,108 +464,16 @@ public class NewLetterActivity extends AppCompatActivity implements DialogResult
             return false;
         }
 
+        if (pendingTime != 0 && (pendingTime < System.currentTimeMillis()))
+        {
+            Toaster.show(getResources().getString(R.string.toast_email_choose_time_again));
+            llClock.startAnimation(AnimationUtils.loadAnimation(this, R.anim.shake));
+            return false;
+        }
+
         return true;
     }
 
-    /**
-     * 发送邮件，需要在线程里面操作
-     */
-    private void sendEmailTask(final String[] emailTo, final String subject, final String content, final String[] attachFileNames)
-    {
-        TaskBuilder.create(new Callable<Boolean>()
-        {
-            @Override
-            public Boolean call() throws Exception
-            {
-                return sendEmailBy163WithAttach(emailTo, subject, content, attachFileNames);
-            }
-        }, new SimpleTaskCallback<Boolean>()
-        {
-
-            ProgressDialog pdLoading = new ProgressDialog(NewLetterActivity.this);
-
-            @Override
-            public void onTaskStarted(String name, Bundle extras)
-            {
-                L.e(TAG, "SimpleTaskCallback()->onTaskStarted");
-                super.onTaskStarted(name, extras);
-                pdLoading.setMessage(getResources().getString(R.string.new_letter_activity_sending_dialog_tip));
-                pdLoading.setCancelable(false);
-                pdLoading.setCanceledOnTouchOutside(false);
-                pdLoading.show();
-            }
-
-            @Override
-            public void onTaskFailure(Throwable ex, Bundle extras)
-            {
-                L.e(TAG, "SimpleTaskCallback()->onTaskFailure");
-                super.onTaskFailure(ex, extras);
-            }
-
-            @Override
-            public void onTaskSuccess(Boolean success, Bundle extras)
-            {
-                L.e(TAG, "SimpleTaskCallback()->onTaskSuccess");
-                super.onTaskSuccess(success, extras);
-                if(success)
-                {
-                    Toaster.show(getResources().getString(R.string.toast_email_send_success));
-                    insertEmailToDBAndNotify(true, System.currentTimeMillis());
-                    insertContactToDBAndNotify();
-                    NewLetterActivity.this.finish();
-                }
-                else
-                {
-                    Toaster.show(getResources().getString(R.string.toast_email_send_fail), true);
-                }
-            }
-
-            @Override
-            public void onTaskFinished(String name, Bundle extras)
-            {
-                L.e(TAG, "SimpleTaskCallback()->onTaskFinished");
-                super.onTaskFinished(name, extras);
-                pdLoading.dismiss();
-            }
-        }, TAG).start();
-    }
-
-    /**
-     * 将邮件写入数据库
-     * */
-    private void insertEmailToDBAndNotify(boolean sendNow, long sendTime)
-    {
-        Email email = new Email();
-        email.receiver = etEmailTo.getText().toString();
-        email.subject = etSubject.getText().toString();
-        email.content = etContent.getText().toString();
-        email.attachPaths = attachPaths;
-        email.isStar = false;
-        email.sendTime = sendTime;// 让用户选时间
-        email.state = sendNow ? 1 : 0;
-        email.sender = getUserEmail();
-        DBManagerEmail.getInstance().insertEmail(email);
-        EmailBus.getInstance().post(new EmailBus.BusEvent(EmailBus.BUS_ID_REFRESH_EMAIL));
-    }
-
-    /**
-     * 将联系人写入数据库
-     * */
-    private void insertContactToDBAndNotify()
-    {
-        Contact contact = new Contact();
-        contact.emailAddress = etEmailTo.getText().toString();
-        if(!DBManagerContact.getInstance().isContactExist(contact.emailAddress))
-        {
-            L.d(TAG, "insertContactToDBAndNotify（）->联系人不存在，执行插入数据的操作");
-            DBManagerContact.getInstance().insertContact(contact);
-            EmailBus.getInstance().post(new EmailBus.BusEvent(EmailBus.BUS_ID_REFRESH_CONTACT));
-        }
-        else
-        {
-            L.d(TAG, "insertContactToDBAndNotify（）->联系人存在，不执行插入数据的操作");
-        }
-    }
 
 //    private void sendEmailAsyncTask(final String[] emailTo, final String subject, final String content, final String[] attachFileNames)
 //    {
@@ -479,59 +522,5 @@ public class NewLetterActivity extends AppCompatActivity implements DialogResult
 //        }
 //    }
 
-    /**
-     * 通过163的账号来发送邮件，支持附件
-     */
-    private boolean sendEmailBy163WithAttach(String[] emailTo, String subject, String content, String[] attachFileNames)
-    {
-        MailSenderInfo mailInfo = new MailSenderInfo();
-        mailInfo.setMailServerHost("smtp.163.com");
-        mailInfo.setMailServerPort("25");
-        mailInfo.setValidate(true);
-        mailInfo.setUserName(getUserEmail());//"michael_ye_36@163.com" TODO
-        mailInfo.setPassword(getPassword());// "Donkey@1988" TODO
-        mailInfo.setFromAddress(getUserEmail());//"michael_ye_36@163.com"
-//        String[] to = {"34795251@qq.com"};
-        mailInfo.setToAddress(emailTo);
-
-//        String[] toCC = {"michaelye"};
-//        mailInfo.setToCarbonCopyAddress(toCC);
-//        String[] toBCC = {"*******@sina.com"};
-//        mailInfo.setToBlindCarbonCopyAddress(toBCC);
-
-//        if(new File(Environment.getExternalStorageDirectory() + File.separator + getResources().getString(R.string.app_name) + File.separator + Consts.AVATAR_NAME).exists())
-//        {
-//
-//            String[] attachFileNames = {Environment.getExternalStorageDirectory() + File.separator + getResources().getString(R.string.app_name) + File.separator + Consts.AVATAR_NAME};
-//            L.e(TAG, "图片存在:"+attachFileNames[0]);
-//            mailInfo.setAttachFileNames(attachFileNames);
-//        }
-//        else
-//        {
-//            L.e(TAG, "图片不存在");
-//        }
-
-        mailInfo.setSubject(subject);
-        mailInfo.setContent(content);
-        mailInfo.setAttachFileNames(attachFileNames);
-        boolean success = SimpleMainSender.sendHtmlMail(mailInfo);
-        return success;
-    }
-
-    /**
-     * 用户设置的Email地址
-     */
-    private String getUserEmail()
-    {
-        return SharedPreferenceUtils.getString(this, Consts.USER_EMAIL, "");
-    }
-
-    /**
-     * 用户设置的密码
-     */
-    private String getPassword()
-    {
-        return SharedPreferenceUtils.getString(this, Consts.PASSWORD, "");
-    }
 
 }
