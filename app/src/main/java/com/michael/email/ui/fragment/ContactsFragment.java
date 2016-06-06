@@ -1,5 +1,6 @@
 package com.michael.email.ui.fragment;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,6 +11,8 @@ import android.widget.ListView;
 
 import com.michael.email.R;
 import com.michael.email.db.DBManagerContact;
+import com.michael.email.dialog.AlertDialogFragment;
+import com.michael.email.dialog.DialogResultListener;
 import com.michael.email.model.Contact;
 import com.michael.email.util.EmailBus;
 import com.michael.email.util.UIUtil;
@@ -20,7 +23,7 @@ import java.util.List;
 /**
  * Created by michael on 16/6/2.
  */
-public class ContactsFragment extends Fragment
+public class ContactsFragment extends Fragment implements DialogResultListener
 {
 
     private ListView lvContact;
@@ -69,6 +72,15 @@ public class ContactsFragment extends Fragment
                 UIUtil.startNewLetterActivity(getActivity(), contactList.get(position).emailAddress);
             }
         });
+        lvContact.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
+        {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                showConfirmDeleteDialog(contactList.get(position).emailAddress);//TODO
+                return true;
+            }
+        });
         addEmptyFooter();
         iniData();
         return parentView;
@@ -85,6 +97,38 @@ public class ContactsFragment extends Fragment
         contactList.clear();
         contactList.addAll(DBManagerContact.getInstance().getContacts());
         contactsFragmentAdapter.notifyDataSetChanged();
+    }
+
+    private int REQUEST_CODE_DELETE = 1;
+
+    private String emailAddress;
+
+    private void showConfirmDeleteDialog(String emailAddress)
+    {
+        this.emailAddress = emailAddress;
+        AlertDialogFragment.Builder builder = new AlertDialogFragment.Builder(getActivity())
+                .setRequestCode(REQUEST_CODE_DELETE)
+                .setMessage(R.string.dialog_delete_contact_tip)
+                .setHasCancelOk(true)
+                .setShowTitle(false)
+                .setCancel(R.string.cancel)
+                .setOk(R.string.ok)
+                .setCancelable(false)
+                .setListener(this);
+        builder.create().show(getActivity());
+    }
+
+    @Override
+    public void onDialogResult(int requestCode, int resultCode, Bundle arguments)
+    {
+        if (requestCode == REQUEST_CODE_DELETE)
+        {
+            if (resultCode == Activity.RESULT_OK)
+            {
+                DBManagerContact.getInstance().deleteContact(emailAddress);
+                EmailBus.getInstance().post(new EmailBus.BusEvent(EmailBus.BUS_ID_REFRESH_CONTACT));
+            }
+        }
     }
 
 }

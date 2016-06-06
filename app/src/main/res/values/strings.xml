@@ -25,6 +25,8 @@
     <string name="dialog_choose_avatar_sdcard_not_found">SD卡不存在</string>
     <string name="dialog_cancel_email_tip">放弃编写邮件？</string>
     <string name="dialog_delete_email_tip">删除该邮件？</string>
+    <string name="dialog_delete_contact_tip">删除该联系人？</string>
+    <string name="dialog_delete_and_cancel_email_tip">删除并取消发送该邮件？</string>
 
     <string name="activity_user_info_setting_tip">输入您的邮箱地址</string>
     <string name="user_name_hint">您的163邮箱地址</string>

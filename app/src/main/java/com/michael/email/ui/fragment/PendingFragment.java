@@ -1,5 +1,6 @@
 package com.michael.email.ui.fragment;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,9 +11,11 @@ import android.widget.ListView;
 
 import com.michael.email.R;
 import com.michael.email.db.DBManagerEmail;
+import com.michael.email.dialog.AlertDialogFragment;
+import com.michael.email.dialog.DialogResultListener;
 import com.michael.email.model.Email;
+import com.michael.email.receiver.AlarmClockManager;
 import com.michael.email.util.EmailBus;
-import com.michael.email.util.UIUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +23,7 @@ import java.util.List;
 /**
  * Created by michael on 16/6/2.
  */
-public class PendingFragment extends Fragment
+public class PendingFragment extends Fragment implements DialogResultListener
 {
 
     private ListView lvPending;
@@ -61,18 +64,15 @@ public class PendingFragment extends Fragment
         lvPending.setAdapter(sendFragmentAdapter);
         lvPending.setEmptyView(parentView.findViewById(R.id.tvEmptyView));
         addEmptyFooter();
-        emailList.addAll(DBManagerEmail.getInstance().getEmailPending());
-        sendFragmentAdapter.notifyDataSetChanged();
+        iniData();
 
-        lvPending.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        lvPending.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
         {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id)
             {
-                if(emailList.get(position) != null)
-                {
-                    UIUtil.startEmailDetailActivity(getActivity(), emailList.get(position).id);
-                }
+                showConfirmDeleteDialog(emailList.get(position).id);
+                return true;
             }
         });
 
@@ -90,5 +90,38 @@ public class PendingFragment extends Fragment
         emailList.clear();
         emailList.addAll(DBManagerEmail.getInstance().getEmailPending());
         sendFragmentAdapter.notifyDataSetChanged();
+    }
+
+    private int REQUEST_CODE_DELETE = 1;
+
+    private String emailIdToBeDelete;
+
+    private void showConfirmDeleteDialog(String id)
+    {
+        emailIdToBeDelete = id;
+        AlertDialogFragment.Builder builder = new AlertDialogFragment.Builder(getActivity())
+                .setRequestCode(REQUEST_CODE_DELETE)
+                .setMessage(R.string.dialog_delete_and_cancel_email_tip)
+                .setHasCancelOk(true)
+                .setShowTitle(false)
+                .setCancel(R.string.cancel)
+                .setOk(R.string.ok)
+                .setCancelable(false)
+                .setListener(this);
+        builder.create().show(getActivity());
+    }
+
+    @Override
+    public void onDialogResult(int requestCode, int resultCode, Bundle arguments)
+    {
+        if (requestCode == REQUEST_CODE_DELETE)
+        {
+            if (resultCode == Activity.RESULT_OK)
+            {
+                AlarmClockManager.cancelClock(getActivity(), Integer.parseInt(emailIdToBeDelete));
+                DBManagerEmail.getInstance().deleteEmail(emailIdToBeDelete);
+                EmailBus.getInstance().post(new EmailBus.BusEvent(EmailBus.BUS_ID_REFRESH_PENDING));
+            }
+        }
     }
 }

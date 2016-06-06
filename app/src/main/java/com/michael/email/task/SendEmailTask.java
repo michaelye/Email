@@ -183,10 +183,11 @@ public class SendEmailTask
         mailInfo.setMailServerHost("smtp.163.com");
         mailInfo.setMailServerPort("25");
         mailInfo.setValidate(true);
-        mailInfo.setUserName(getUserEmail());//"michael_ye_36@163.com" TODO
-        mailInfo.setPassword(getPassword());// "Donkey@1988" TODO
-        mailInfo.setFromAddress(getUserEmail());//"michael_ye_36@163.com"
-//        String[] to = {"34795251@qq.com"};
+        mailInfo.setUserName(getUserEmail());
+        mailInfo.setPassword(getPassword());
+        mailInfo.setFromAddress(getUserEmail());
+        L.e(TAG, "getEmail:"+getUserEmail());
+        L.e(TAG, "getPassword:"+getPassword());
         mailInfo.setToAddress(emailTo);
 
 //        String[] toCC = {"michaelye"};
