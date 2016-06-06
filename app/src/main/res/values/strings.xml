@@ -58,4 +58,10 @@
     <string name="action_bar_text_modify_account">修改账户</string>
     <string name="action_bar_text_set_account">设置账户</string>
 
+    <string name="empty_view_tip_no_send">没有已发送的邮件</string>
+    <string name="empty_view_tip_no_star">没有加星的邮件</string>
+    <string name="empty_view_tip_no_pending">没有要发送的邮件</string>
+    <string name="empty_view_tip_no_contact">没有联系人</string>
+
+
 </resources>

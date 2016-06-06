@@ -60,6 +60,7 @@ public class ContactsFragment extends Fragment
         contactList = new ArrayList<>();
         contactsFragmentAdapter = new ContactsFragmentAdapter(getActivity(), contactList);
         lvContact.setAdapter(contactsFragmentAdapter);
+        lvContact.setEmptyView(parentView.findViewById(R.id.tvEmptyView));
         lvContact.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override

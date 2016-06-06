@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
     <ListView
         android:id="@+id/lvContact"
@@ -11,5 +10,15 @@
         android:dividerHeight="1px"
         />
 
+    <TextView
+        android:id="@+id/tvEmptyView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:text="@string/empty_view_tip_no_contact"
+        android:textColor="@color/newM_text_color"
+        android:textSize="20sp"
+        />
 
-</LinearLayout>
+</RelativeLayout>

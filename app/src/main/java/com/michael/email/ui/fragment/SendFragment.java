@@ -60,6 +60,7 @@ public class SendFragment extends Fragment
         emailList = new ArrayList<>();
         sendFragmentAdapter = new SendFragmentAdapter(getActivity(), emailList);
         lvSend.setAdapter(sendFragmentAdapter);
+        lvSend.setEmptyView(parentView.findViewById(R.id.tvEmptyView));
         addEmptyFooter();
         emailList.addAll(DBManagerEmail.getInstance().getEmailSend());
         sendFragmentAdapter.notifyDataSetChanged();
@@ -88,5 +89,4 @@ public class SendFragment extends Fragment
         emailList.addAll(DBManagerEmail.getInstance().getEmailSend());
         sendFragmentAdapter.notifyDataSetChanged();
     }
-
 }

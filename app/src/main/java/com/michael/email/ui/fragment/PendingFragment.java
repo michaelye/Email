@@ -59,6 +59,7 @@ public class PendingFragment extends Fragment
         emailList = new ArrayList<>();
         sendFragmentAdapter = new SendFragmentAdapter(getActivity(), emailList);
         lvPending.setAdapter(sendFragmentAdapter);
+        lvPending.setEmptyView(parentView.findViewById(R.id.tvEmptyView));
         addEmptyFooter();
         emailList.addAll(DBManagerEmail.getInstance().getEmailPending());
         sendFragmentAdapter.notifyDataSetChanged();

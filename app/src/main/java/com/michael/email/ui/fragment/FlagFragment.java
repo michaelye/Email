@@ -58,6 +58,7 @@ public class FlagFragment extends Fragment
         emailList = new ArrayList<>();
         sendFragmentAdapter = new SendFragmentAdapter(getActivity(), emailList);
         lvFlag.setAdapter(sendFragmentAdapter);
+        lvFlag.setEmptyView(parentView.findViewById(R.id.tvEmptyView));
         addEmptyFooter();
         iniData();
         return parentView;
