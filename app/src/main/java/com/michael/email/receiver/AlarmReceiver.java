@@ -9,7 +9,7 @@ import android.content.Intent;
 import android.os.Build;
 
 import com.michael.email.R;
-import com.michael.email.SendEmailTask;
+import com.michael.email.task.SendEmailTask;
 import com.michael.email.db.DBManagerEmail;
 import com.michael.email.model.Email;
 import com.michael.email.ui.activity.MainActivity;

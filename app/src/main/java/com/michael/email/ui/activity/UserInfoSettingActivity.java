@@ -239,10 +239,10 @@ public class UserInfoSettingActivity extends AppCompatActivity
         {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
-            getSupportActionBar().setTitle("修改账户");
+            getSupportActionBar().setTitle(getResources().getString(R.string.action_bar_text_modify_account));
         } else
         {
-            getSupportActionBar().setTitle("设置账户");
+            getSupportActionBar().setTitle(getResources().getString(R.string.action_bar_text_set_account));
         }
 
         String userEmail = SharedPreferenceUtils.getString(this, Consts.USER_EMAIL, "");

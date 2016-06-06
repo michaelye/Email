@@ -46,6 +46,28 @@
         </activity>
 
         <activity
+            android:name=".ui.activity.QuestionActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeWithActionBar" >
+            <!--<intent-filter >-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
+
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+
+        <activity
+            android:name=".ui.activity.AboutActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeWithActionBar" >
+            <!--<intent-filter >-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
+
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+
+        <activity
             android:name=".ui.activity.NewLetterActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeWhiteActionBar" >

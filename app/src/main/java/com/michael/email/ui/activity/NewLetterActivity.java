@@ -22,7 +22,7 @@ import android.widget.TextView;
 import com.github.jjobes.slidedatetimepicker.SlideDateTimeListener;
 import com.github.jjobes.slidedatetimepicker.SlideDateTimePicker;
 import com.michael.email.R;
-import com.michael.email.SendEmailTask;
+import com.michael.email.task.SendEmailTask;
 import com.michael.email.db.DBManagerEmail;
 import com.michael.email.dialog.AlertDialogFragment;
 import com.michael.email.dialog.DialogResultListener;

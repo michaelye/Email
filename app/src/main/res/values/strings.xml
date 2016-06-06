@@ -53,4 +53,9 @@
     <string name="toast_email_choose_time_fail">定时邮件时间必须大于当前时间</string>
     <string name="toast_email_choose_time_again">定时邮件时间必须大于当前时间，请重新选择发送时间</string>
 
+    <string name="action_bar_text_about">关于</string>
+    <string name="action_bar_text_question">Q＆A</string>
+    <string name="action_bar_text_modify_account">修改账户</string>
+    <string name="action_bar_text_set_account">设置账户</string>
+
 </resources>

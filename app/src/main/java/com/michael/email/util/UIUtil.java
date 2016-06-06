@@ -5,9 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Environment;
 
+import com.michael.email.ui.activity.AboutActivity;
 import com.michael.email.ui.activity.EmailDetailActivity;
 import com.michael.email.ui.activity.MainActivity;
 import com.michael.email.ui.activity.NewLetterActivity;
+import com.michael.email.ui.activity.QuestionActivity;
 import com.michael.email.ui.activity.UserInfoSettingActivity;
 import com.nononsenseapps.filepicker.FilePickerActivity;
 
@@ -61,6 +63,24 @@ public class UIUtil
     {
         Intent intent = new Intent(context, EmailDetailActivity.class);
         intent.putExtra("emailId", emailId);
+        context.startActivity(intent);
+    }
+
+    /**
+     * 问题页面
+     */
+    public static void startQuestionActivity(Context context)
+    {
+        Intent intent = new Intent(context, QuestionActivity.class);
+        context.startActivity(intent);
+    }
+
+    /**
+     * 关于页面
+     */
+    public static void startAboutActivity(Context context)
+    {
+        Intent intent = new Intent(context, AboutActivity.class);
         context.startActivity(intent);
     }
 

@@ -177,8 +177,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         changeFragment(lastFragment);
                         break;
                     case R.id.menuSetting:
+                        UIUtil.startQuestionActivity(MainActivity.this);
                         break;
                     case R.id.menuAbout:
+                        UIUtil.startAboutActivity(MainActivity.this);
                         break;
                 }
                 return true;
