@@ -2,6 +2,7 @@ package com.michael.email.ui.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -27,6 +28,8 @@ public class WelComeActivity extends AppCompatActivity
     public void onCreate(Bundle bundle)
     {
         super.onCreate(bundle);
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_welcome);
 
         ivImage = (ImageView) findViewById(R.id.ivImage);
@@ -52,7 +55,7 @@ public class WelComeActivity extends AppCompatActivity
                 String userEmail = SharedPreferenceUtils.getString(WelComeActivity.this, Consts.USER_EMAIL, "");
                 if(userEmail == null || userEmail.isEmpty())
                 {
-                    UIUtil.startUserInfoSettingActivity(WelComeActivity.this, true);
+                    UIUtil.startUserInfoSettingActivity(WelComeActivity.this, false);
                 }
                 else
                 {

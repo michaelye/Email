@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">@color/menuColorBlue</color>
+    <color name="colorPrimaryDark">@color/menuColorBlue</color>
     <color name="colorAccent">#FF4081</color>
 
     <color name="menuColorBlack">#404040</color>
-    <color name="menuColorGreen">#00954e</color>
     <color name="menuColorRed">#ff4521</color>
+    <color name="menuColorPurple">#8C01E3</color>
     <color name="menuColorYellow">#F4B400</color>
     <color name="menuColorOrange">#F56D23</color>
-    <color name="menuColorBlue">#0E82FF</color>
-    <color name="menuColorBlue2">#346DF1</color>
+    <color name="menuColorBlue">#346DF1</color>
 
     <color name="newL_text_color">#555555</color>
     <color name="newM_text_color">#b4b4b4</color>

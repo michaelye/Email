@@ -35,6 +35,7 @@
         android:layout_centerHorizontal="true"
         android:textColor="#60717d"
         android:textSize="11sp"
+        android:visibility="invisible"
         android:text="@string/author" />
 
 </RelativeLayout>

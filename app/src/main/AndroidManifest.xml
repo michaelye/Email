@@ -2,9 +2,9 @@
 <manifest package="com.michael.email"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
@@ -14,8 +14,11 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/MyAppTheme">
-        <activity android:name=".ui.activity.MainActivity"
-                  android:screenOrientation="portrait">
+
+        <activity
+            android:name=".ui.activity.WelComeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyAppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -24,69 +27,38 @@
         </activity>
 
         <activity
-            android:name=".ui.activity.WelComeActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/MyAppTheme" >
-            <!--<intent-filter >-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            android:name=".ui.activity.MainActivity"
+            android:screenOrientation="portrait">
         </activity>
 
         <activity
             android:name=".ui.activity.UserInfoSettingActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeWithActionBar" >
-            <!--<intent-filter >-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            android:theme="@style/AppThemeWithActionBar">
         </activity>
 
         <activity
             android:name=".ui.activity.QuestionActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeWithActionBar" >
-            <!--<intent-filter >-->
-            <!--<action android:name="android.intent.action.MAIN" />-->
-
-            <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            android:theme="@style/AppThemeWithActionBar">
         </activity>
 
         <activity
             android:name=".ui.activity.AboutActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeWithActionBar" >
-            <!--<intent-filter >-->
-            <!--<action android:name="android.intent.action.MAIN" />-->
-
-            <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            android:theme="@style/AppThemeWithActionBar">
         </activity>
 
         <activity
             android:name=".ui.activity.NewLetterActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeWhiteActionBar" >
-            <!--<intent-filter >-->
-            <!--<action android:name="android.intent.action.MAIN" />-->
-
-            <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            android:theme="@style/AppThemeWhiteActionBar">
         </activity>
 
         <activity
             android:name=".ui.activity.EmailDetailActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeWhiteActionBar" >
-            <!--<intent-filter >-->
-            <!--<action android:name="android.intent.action.MAIN" />-->
-
-            <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            android:theme="@style/AppThemeWhiteActionBar">
         </activity>
 
         <activity
@@ -94,15 +66,15 @@
             android:label="@string/app_name"
             android:theme="@style/FilePickerTheme">
             <intent-filter>
-                <action android:name="android.intent.action.GET_CONTENT" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.GET_CONTENT"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
 
         <!-- android:process=":remote": 新开一个进程  注意包名称 -->
         <receiver
             android:name="com.michael.email.receiver.AlarmReceiver"
-            android:process=":remote" />
+            android:process=":remote"/>
 
     </application>
 

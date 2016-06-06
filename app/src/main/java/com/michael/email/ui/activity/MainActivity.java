@@ -124,8 +124,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         navigationView.setCheckedItem(R.id.menuSend);
                         tvTitle.setText(getResources().getString(R.string.menu_send));
                         resetMenuTextColor();
-                        changeMenuItemTextColor(menuItem, R.color.menuColorBlue2);
-                        changeToolbarColor(R.color.menuColorBlue2);
+                        changeMenuItemTextColor(menuItem, R.color.menuColorBlue);
+                        changeToolbarColor(R.color.menuColorBlue);
                         if (sendFragment == null)
                         {
                             L.e(TAG, "************ sendFragment is null");
@@ -166,8 +166,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         navigationView.setCheckedItem(R.id.menuContacts);
                         tvTitle.setText(getResources().getString(R.string.menu_contacts));
                         resetMenuTextColor();
-                        changeMenuItemTextColor(menuItem, R.color.menuColorBlue);
-                        changeToolbarColor(R.color.menuColorBlue);
+                        changeMenuItemTextColor(menuItem, R.color.menuColorPurple);
+                        changeToolbarColor(R.color.menuColorPurple);
                         if (contactsFragment == null)
                         {
                             L.e(TAG, "************ contactsFragment is null");
@@ -331,7 +331,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private int getDefaultToolBarColor()
     {
-        return R.color.menuColorGreen;
+        return R.color.menuColorBlue;
     }
 
     /**
