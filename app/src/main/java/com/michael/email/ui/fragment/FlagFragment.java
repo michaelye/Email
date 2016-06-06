@@ -89,7 +89,7 @@ public class FlagFragment extends Fragment implements DialogResultListener
     private void addEmptyFooter()
     {
         View emptyView = getActivity().getLayoutInflater().inflate(R.layout.layout_empty_footer, null);
-        lvFlag.addFooterView(emptyView);
+        lvFlag.addFooterView(emptyView, null, false);
     }
 
     private void iniData()

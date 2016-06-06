@@ -89,7 +89,7 @@ public class ContactsFragment extends Fragment implements DialogResultListener
     private void addEmptyFooter()
     {
         View emptyView = getActivity().getLayoutInflater().inflate(R.layout.layout_empty_footer, null);
-        lvContact.addFooterView(emptyView);
+        lvContact.addFooterView(emptyView, null, false);
     }
 
     private void iniData()

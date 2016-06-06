@@ -90,7 +90,7 @@ public class SendFragment extends Fragment implements DialogResultListener
     private void addEmptyFooter()
     {
         View emptyView = getActivity().getLayoutInflater().inflate(R.layout.layout_empty_footer, null);
-        lvSend.addFooterView(emptyView);
+        lvSend.addFooterView(emptyView, null, false);
     }
 
     private void iniData()

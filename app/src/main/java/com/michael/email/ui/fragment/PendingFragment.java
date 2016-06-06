@@ -82,7 +82,7 @@ public class PendingFragment extends Fragment implements DialogResultListener
     private void addEmptyFooter()
     {
         View emptyView = getActivity().getLayoutInflater().inflate(R.layout.layout_empty_footer, null);
-        lvPending.addFooterView(emptyView);
+        lvPending.addFooterView(emptyView, null, false);
     }
 
     private void iniData()
